@@ -61,10 +61,10 @@
         .upload-label:hover {
             background: #0056b3;
         }
-        .convert-btn, .download-btn {
+        .download-btn {
             margin-top: 20px;
             display: none;
-            background: #28a745;
+            background: #ff5722;
             color: white;
             border: none;
             padding: 15px 30px;
@@ -72,12 +72,7 @@
             border-radius: 5px;
             font-size: 18px;
             transition: 0.3s;
-        }
-        .convert-btn:hover {
-            background: #218838;
-        }
-        .download-btn {
-            background: #ff5722;
+            text-decoration: none;
         }
         .download-btn:hover {
             background: #e64a19;
@@ -94,26 +89,19 @@
         <label for="fileInput" class="upload-label">Choose Images</label>
         <input type="file" id="fileInput" multiple accept="image/*">
         
-        <button class="convert-btn" onclick="convertToPDF()">Convert to PDF</button>
         <a class="download-btn" id="downloadBtn" style="display: none;">Download PDF</a>
     </div>
 
     <script>
         const fileInput = document.getElementById("fileInput");
-        const convertBtn = document.querySelector(".convert-btn");
         const downloadBtn = document.getElementById("downloadBtn");
 
         fileInput.addEventListener("change", () => {
             if (fileInput.files.length > 0) {
-                convertBtn.style.display = "block";
+                downloadBtn.style.display = "block";
+                downloadBtn.href = "#"; // This will be replaced with the actual PDF download link later
             }
         });
-
-        function convertToPDF() {
-            alert("PDF conversion function will be added soon!");
-            downloadBtn.style.display = "block";
-            downloadBtn.href = "#"; // This will be replaced with the actual PDF download link later
-        }
     </script>
 
 </body>
