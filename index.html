@@ -5,65 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Maker</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            padding-top: 70px; /* Space for fixed header */
             text-align: center;
         }
-        .navbar {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            font-size: 20px;
+        header {
+            background: #ffffff;
+            width: 100%;
+            height: 60px;
+            z-index: 1041;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            -webkit-box-shadow: 0 3px 6px 0 rgba(50, 50, 50, .3);
+            box-shadow: 0 3px 6px 0 rgba(50, 50, 50, .3);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+        }
+        header h2 {
+            font-size: 22px;
+            font-weight: bold;
         }
         .container {
-            margin-top: 50px;
+            margin-top: 20px;
         }
-        .convert-btn, .download-btn {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #007BFF;
+        .file-input {
+            margin: 20px 0;
+        }
+        button {
+            background: #007bff;
             color: white;
             border: none;
+            padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
-            display: none; /* Hide initially */
+            font-size: 16px;
         }
-        .convert-btn:hover, .download-btn:hover {
-            background-color: #0056b3;
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        PDF Maker
-    </div>
+    <header>
+        <h2>PDF Maker</h2>
+    </header>
 
     <div class="container">
-        <h2>Convert Image to PDF</h2>
-        <input type="file" id="fileInput" accept="image/*">
-        <button class="convert-btn" id="convertBtn">Convert</button>
-        <button class="download-btn" id="downloadBtn">Download PDF</button>
+        <input type="file" id="fileInput" class="file-input" accept="image/*">
+        <br>
+        <button id="convertBtn" disabled>Convert to PDF</button>
     </div>
 
     <script>
-        const fileInput = document.getElementById('fileInput');
-        const convertBtn = document.getElementById('convertBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
+        const fileInput = document.getElementById("fileInput");
+        const convertBtn = document.getElementById("convertBtn");
 
-        fileInput.addEventListener('change', () => {
+        fileInput.addEventListener("change", () => {
             if (fileInput.files.length > 0) {
-                convertBtn.style.display = 'inline-block'; // Show Convert button
+                convertBtn.removeAttribute("disabled");
+            } else {
+                convertBtn.setAttribute("disabled", true);
             }
-        });
-
-        convertBtn.addEventListener('click', () => {
-            // Placeholder action (actual PDF conversion will be added later)
-            setTimeout(() => {
-                downloadBtn.style.display = 'inline-block'; // Show Download button
-            }, 1000);
         });
     </script>
 
