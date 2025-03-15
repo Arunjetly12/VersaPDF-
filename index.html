@@ -13,7 +13,11 @@
         }
         body {
             padding-top: 70px; /* Space for fixed header */
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f8f9fa;
         }
         header {
             background: #ffffff;
@@ -34,24 +38,25 @@
             font-size: 22px;
             font-weight: bold;
         }
-        .container {
-            margin-top: 20px;
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
-        .file-input {
-            margin: 20px 0;
-        }
-        button {
+        .btn {
             background: #007bff;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 18px;
+            transition: 0.3s;
         }
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
+        .btn:hover {
+            background: #0056b3;
         }
     </style>
 </head>
@@ -61,24 +66,9 @@
         <h2>PDF Maker</h2>
     </header>
 
-    <div class="container">
-        <input type="file" id="fileInput" class="file-input" accept="image/*">
-        <br>
-        <button id="convertBtn" disabled>Convert to PDF</button>
+    <div class="box">
+        <button class="btn" onclick="window.location.href='upload.html'">Start Creating PDF</button>
     </div>
-
-    <script>
-        const fileInput = document.getElementById("fileInput");
-        const convertBtn = document.getElementById("convertBtn");
-
-        fileInput.addEventListener("change", () => {
-            if (fileInput.files.length > 0) {
-                convertBtn.removeAttribute("disabled");
-            } else {
-                convertBtn.setAttribute("disabled", true);
-            }
-        });
-    </script>
 
 </body>
 </html>
