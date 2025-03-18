@@ -213,10 +213,52 @@
             </select>
         </div>
         <div class="action-buttons">
-            <button class="btn btn-primary">Convert to PDF</button>
-            <button class="btn btn-success">Download PDF</button>
+            <button class="btn btn-primary" id="convert-btn">Convert to PDF</button>
+            <button class="btn btn-success" id="download-btn" style="display: none;">Download PDF</button>
             <button class="btn btn-blue">Save to Cloud</button>
         </div>
     </div>
 </body>
+        </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        let pdf; // Stores the generated PDF
+
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            pdf = new jsPDF();
+            const images = document.querySelectorAll('#image-preview img');
+
+            if (images.length === 0) {
+                alert('Please upload at least one image.');
+                return;
+            }
+
+            images.forEach((img, index) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+                ctx.drawImage(img, 0, 0);
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                
+                if (index > 0) pdf.addPage();
+                pdf.addImage(imgData, 'JPEG', 10, 10, 180, 240);
+            });
+
+            document.getElementById('download-btn').style.display = 'block';
+            alert('PDF Generated! Click "Download PDF" to save.');
+        });
+
+        document.getElementById('download-btn').addEventListener('click', function() {
+            if (pdf) {
+                pdf.save('converted.pdf');
+            }
+        });
+    </script>
+
+</body>
+</html>
+
 </html>
