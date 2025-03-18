@@ -137,6 +137,28 @@
         <div class="upload-area">Drag & Drop Images Here</div>
         <input type="file" id="file-input" style="display: none;" multiple accept="image/*">
         <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Upload Images</button>
+        <div id="image-preview" style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;"></div>
+        <script>
+    document.getElementById('file-input').addEventListener('change', function(event) {
+        const files = event.target.files;
+        const preview = document.getElementById('image-preview');
+        preview.innerHTML = ''; // Clear previous previews
+
+        for (let file of files) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '100px';
+                img.style.height = '100px';
+                img.style.objectFit = 'cover';
+                img.style.borderRadius = '8px';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
         <script>
     document.getElementById('file-input').addEventListener('change', function(event) {
         const files = event.target.files;
