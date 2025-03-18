@@ -248,24 +248,25 @@
                 ctx.drawImage(img, 0, 0);
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-                // Define A4 page size in points (1pt = 1/72 inch)
-                const a4Width = 595.28;  // A4 width in points (JS PDF standard)
+                // A4 page size in points (1pt = 1/72 inch)
+                const a4Width = 595.28;  // A4 width in points
                 const a4Height = 841.89; // A4 height in points
                 const margin = 20; // Margin from edges
 
                 // Get image dimensions
-                let imgWidth = img.naturalWidth;
-                let imgHeight = img.naturalHeight;
+                let imgWidth = img.naturalWidth * 0.75; // Convert from pixels to points (assuming 96 DPI)
+                let imgHeight = img.naturalHeight * 0.75;
                 const imgAspectRatio = imgWidth / imgHeight;
 
-                // Scale the image to fit inside A4 while keeping aspect ratio
-                if (imgWidth > a4Width - 2 * margin) {
-                    imgWidth = a4Width - 2 * margin;
-                    imgHeight = imgWidth / imgAspectRatio;
-                }
-                if (imgHeight > a4Height - 2 * margin) {
-                    imgHeight = a4Height - 2 * margin;
-                    imgWidth = imgHeight * imgAspectRatio;
+                // Only scale down if the image is too big for A4
+                if (imgWidth > a4Width - 2 * margin || imgHeight > a4Height - 2 * margin) {
+                    if (imgWidth > imgHeight) {
+                        imgWidth = a4Width - 2 * margin;
+                        imgHeight = imgWidth / imgAspectRatio;
+                    } else {
+                        imgHeight = a4Height - 2 * margin;
+                        imgWidth = imgHeight * imgAspectRatio;
+                    }
                 }
 
                 // Center the image
@@ -287,5 +288,6 @@
         }
     });
 </script>
+
 </body>
 </html>
