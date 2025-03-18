@@ -137,6 +137,13 @@
         <div class="upload-area">Drag & Drop Images Here</div>
         <input type="file" id="file-input" style="display: none;">
         <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Upload Images</button>
+        <script>
+    document.getElementById('file-input').addEventListener('change', function(event) {
+        const files = event.target.files;
+        console.log("Uploaded files:", files); // Logs selected files to the console
+    });
+</script>
+
         <div class="options">
             <select id="page-size" name="page-size">
                 <option>Page Size: A4</option>
