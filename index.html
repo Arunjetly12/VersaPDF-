@@ -115,17 +115,13 @@
             justify-content: center;
             gap: 15px;
         }
-        .dark-mode {
-            background-color: #181818;
-            color: #FFFFFF;
-        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
             <a href="/">
-                <img src="https://i.postimg.cc/T1T5Vrw9/freepik-colorful-creative-publishing-company-logo-20250318050310i6s9.png" alt="Logo">
+                <img src="https://i.postimg.cc/vHNDTRWX/freepik-colorful-creative-publishing-company-logo-20250318050310i6s9.png" alt="Logo">
             </a>
         </div>
         <div class="nav-links">
@@ -139,7 +135,8 @@
         <h1>Convert Images to PDF</h1>
         <h2>Fast, Free & Secure PDF Creation</h2>
         <div class="upload-area">Drag & Drop Images Here</div>
-        <button class="btn btn-primary">Upload Images</button>
+        <input type="file" id="file-input" style="display: none;">
+        <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Upload Images</button>
         <div class="options">
             <select>
                 <option>Page Size: A4</option>
