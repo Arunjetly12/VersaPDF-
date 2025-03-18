@@ -15,6 +15,22 @@
             padding: 0;
             transition: background 0.3s, color 0.3s;
         }
+        #image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  /* Centers images */
+    align-items: center;
+    width: 100%;  /* Ensures it spans the container */
+    margin-top: 20px;
+    gap: 10px;
+}
+#image-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
         .navbar {
             display: flex;
             justify-content: space-between;
