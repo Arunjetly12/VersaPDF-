@@ -214,68 +214,82 @@
         <div class="action-buttons">
             <button class="btn btn-primary" id="convert-btn">Convert to PDF</button>
             <button class="btn btn-success" id="download-btn" style="display: none;">Download PDF</button>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script>
-    let pdf; // Stores the generated PDF
+                        <button class="btn btn-blue">Save to Cloud</button>
+        </div> <!-- ✅ Correctly closing action-buttons div -->
 
-    document.getElementById('convert-btn').addEventListener('click', function() {
-        const { jsPDF } = window.jspdf;
-        pdf = new jsPDF();
-        const images = document.querySelectorAll('#image-preview img');
+        <!-- ✅ Move the loading spinner outside the action buttons -->
+        <div id="loading-spinner" style="display: none; margin-top: 20px; text-align: center;">
+            <i class="fa fa-spinner fa-spin" style="font-size: 24px; color: #FF4C4C;"></i>
+            <p>Converting to PDF...</p>
+        </div>
 
-        if (images.length === 0) {
-            alert('Please upload at least one image.');
-            return;
-        }
+    </div> <!-- ✅ Correctly closing the container -->
 
-        document.getElementById('loading-spinner').style.display = 'block'; // Show loading
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        let pdf; // Stores the generated PDF
 
-        setTimeout(() => {
-            images.forEach((img, index) => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = img.naturalWidth;
-                canvas.height = img.naturalHeight;
-                ctx.drawImage(img, 0, 0);
-                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            pdf = new jsPDF();
+            const images = document.querySelectorAll('#image-preview img');
 
-                // ✅ Define A4 page size in points (1pt = 1/72 inch)
-                const a4Width = 595.28;  
-                const a4Height = 841.89; 
-                const margin = 20; // Margin from edges
+            if (images.length === 0) {
+                alert('Please upload at least one image.');
+                return;
+            }
 
-                // ✅ Get image original dimensions and aspect ratio
-                let imgWidth = img.naturalWidth * 0.2645; // Convert pixels to points (1px ≈ 0.2645pt)
-                let imgHeight = img.naturalHeight * 0.2645;
-                const imgAspectRatio = imgWidth / imgHeight;
+            document.getElementById('loading-spinner').style.display = 'block'; // Show loading
 
-                // ✅ Ensure image fits inside A4 without enlarging small images
-                if (imgWidth > a4Width - 2 * margin || imgHeight > a4Height - 2 * margin) {
-                    if (imgAspectRatio > 1) {
-                        imgWidth = a4Width - 2 * margin;
-                        imgHeight = imgWidth / imgAspectRatio;
-                    } else {
-                        imgHeight = a4Height - 2 * margin;
-                        imgWidth = imgHeight * imgAspectRatio;
+            setTimeout(() => {
+                images.forEach((img, index) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    ctx.drawImage(img, 0, 0);
+                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+                    // ✅ Proper A4 page size in points
+                    const a4Width = 595.28;  
+                    const a4Height = 841.89; 
+                    const margin = 20;
+
+                    // ✅ Get image dimensions and aspect ratio
+                    let imgWidth = img.naturalWidth * 0.75; // Convert pixels to points
+                    let imgHeight = img.naturalHeight * 0.75;
+                    const imgAspectRatio = imgWidth / imgHeight;
+
+                    // ✅ Fit image inside A4 without enlarging
+                    if (imgWidth > a4Width - 2 * margin || imgHeight > a4Height - 2 * margin) {
+                        if (imgAspectRatio > 1) {
+                            imgWidth = a4Width - 2 * margin;
+                            imgHeight = imgWidth / imgAspectRatio;
+                        } else {
+                            imgHeight = a4Height - 2 * margin;
+                            imgWidth = imgHeight * imgAspectRatio;
+                        }
                     }
-                }
 
-                // ✅ Center the image
-                const x = (a4Width - imgWidth) / 2;
-                const y = (a4Height - imgHeight) / 2;
+                    // ✅ Center the image
+                    const x = (a4Width - imgWidth) / 2;
+                    const y = (a4Height - imgHeight) / 2;
 
-                if (index > 0) pdf.addPage();
-                pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
-            });
+                    if (index > 0) pdf.addPage();
+                    pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
+                });
 
-            document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
-            document.getElementById('download-btn').style.display = 'block'; // Show download button
-        }, 2000);
-    });
+                document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
+                document.getElementById('download-btn').style.display = 'block'; // Show download button
+            }, 2000);
+        });
 
-    document.getElementById('download-btn').addEventListener('click', function() {
-        if (pdf) {
-            pdf.save('converted.pdf');
-        }
-    });
-</script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+            if (pdf) {
+                pdf.save('converted.pdf');
+            }
+        });
+    </script>
+
+</body>
+</html>
