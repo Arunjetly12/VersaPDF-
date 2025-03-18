@@ -33,14 +33,24 @@
  /* Style for the top image */
 .top-image {
   text-align: center; /* Centers the image */
-  margin-top: 0; /* Adjusts the margin if you need space above the image */
+  margin-top: 0;
+     opacity: 0; /* Start with the image hidden */
+  animation: fadeIn 2s forwards; /* Apply fade-in animation over 2 seconds *//* Adjusts the margin if you need space above the image */
 }
 
 .top-image img {
   max-width: 100%; /* Ensures the image is responsive */
   height: auto; /* Maintains the aspect ratio */
   border-bottom: 2px solid #ddd; /* Optional: Adds a subtle border below the image */
-  border-radius: 15px; /* Adds rounded corners to the image */
+  border-radius: 15px; 
+  /* Define the fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start with image hidden */
+  }
+  to {
+    opacity: 1; /* Fade in to fully visible */
+  }
 }
 
         .navbar {
