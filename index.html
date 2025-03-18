@@ -248,25 +248,32 @@
                 ctx.drawImage(img, 0, 0);
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-                // Define A4 page size (in pixels for 96 DPI)
-                const a4Width = 595;  // A4 width in points (JS PDF uses 1pt = 1/72 inch)
-                const a4Height = 842; // A4 height in points
+                // Define A4 page size in points (1pt = 1/72 inch)
+                const a4Width = 595.28;  // A4 width in points (JS PDF standard)
+                const a4Height = 841.89; // A4 height in points
                 const margin = 20; // Margin from edges
 
-                // Get image aspect ratio
-                const imgAspectRatio = img.naturalWidth / img.naturalHeight;
+                // Get image dimensions
+                let imgWidth = img.naturalWidth;
+                let imgHeight = img.naturalHeight;
+                const imgAspectRatio = imgWidth / imgHeight;
 
-                // Calculate the best-fit size
-                let imgWidth = a4Width - 2 * margin;
-                let imgHeight = imgWidth / imgAspectRatio;
-
+                // Scale the image to fit inside A4 while keeping aspect ratio
+                if (imgWidth > a4Width - 2 * margin) {
+                    imgWidth = a4Width - 2 * margin;
+                    imgHeight = imgWidth / imgAspectRatio;
+                }
                 if (imgHeight > a4Height - 2 * margin) {
                     imgHeight = a4Height - 2 * margin;
                     imgWidth = imgHeight * imgAspectRatio;
                 }
 
+                // Center the image
+                const x = (a4Width - imgWidth) / 2;
+                const y = (a4Height - imgHeight) / 2;
+
                 if (index > 0) pdf.addPage();
-                pdf.addImage(imgData, 'JPEG', (a4Width - imgWidth) / 2, (a4Height - imgHeight) / 2, imgWidth, imgHeight);
+                pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
             });
 
             document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
@@ -280,8 +287,5 @@
         }
     });
 </script>
-
-
-
 </body>
 </html>
