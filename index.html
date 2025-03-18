@@ -248,8 +248,24 @@
                 ctx.drawImage(img, 0, 0);
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
+                // Define A4 page size (in mm)
+                const a4Width = 210;
+                const a4Height = 297;
+                const margin = 10; // Small margin
+
+                // Get image aspect ratio
+                const imgAspectRatio = img.naturalWidth / img.naturalHeight;
+                let imgWidth = a4Width - 2 * margin;
+                let imgHeight = imgWidth / imgAspectRatio;
+
+                // If height exceeds A4 page height, resize based on height instead
+                if (imgHeight > a4Height - 2 * margin) {
+                    imgHeight = a4Height - 2 * margin;
+                    imgWidth = imgHeight * imgAspectRatio;
+                }
+
                 if (index > 0) pdf.addPage();
-                pdf.addImage(imgData, 'JPEG', 10, 10, 180, 240);
+                pdf.addImage(imgData, 'JPEG', (a4Width - imgWidth) / 2, (a4Height - imgHeight) / 2, imgWidth, imgHeight);
             });
 
             document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
@@ -263,6 +279,7 @@
         }
     });
 </script>
+
 
 
 </body>
