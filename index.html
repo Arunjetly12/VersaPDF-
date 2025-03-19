@@ -16,75 +16,77 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* 🌟 Make the whole page take full height */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-/* 🌟 Push footer to the bottom */
+        /* 🌟 Footer Styles */
 footer {
-    margin-top: auto;
     background-color: #f2f2f2;
     font-family: 'Open Sans', sans-serif;
-    padding: 20px;
-}
-
-/* 🌟 Footer Container - Vertical Layout */
-.footer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* 🌟 Footer Section */
-.footer-section {
     text-align: center;
-    padding: 20px;
+    padding: 20px 0;
     width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+/* 🌟 Top Section */
+.footer-top {
+    padding: 20px;
     border-bottom: 1px solid #ccc;
-}
-
-/* 🌟 Vertical Divider Effect */
-.footer-section:not(:last-child)::after {
-    content: "";
-    display: block;
-    width: 80%;
-    height: 1px;
-    background-color: #ccc;
-    margin: 20px auto;
-}
-
-/* 🌟 Footer Bottom Section */
-.footer-bottom {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-size: 12px;
-    border-top: 1px solid #ccc;
-    width: 100%;
-}
-
-/* 🌟 Links */
-.footer-links a {
-    display: block;
+    font-size: 14px;
     color: #333;
+}
+
+/* 🌟 Footer Sections */
+.footer-section {
+    padding: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* 🌟 Footer Links */
+.footer-section a {
+    display: block;
     text-decoration: none;
+    color: #333;
     padding: 5px 0;
     font-size: 14px;
 }
 
-/* 🌟 Social Icons */
-.social-icons a {
-    margin: 0 10px;
+/* 🌟 Social Media Icons */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
 }
 
-/* 🌟 Buttons */
+.social-icons a img {
+    width: 20px;
+    height: 20px;
+}
+
+/* 🌟 Vertical Divider */
+.footer-divider {
+    width: 80%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px auto;
+}
+
+/* 🌟 Bottom Section */
+.footer-bottom {
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+    border-top: 1px solid #ccc;
+}
+
+/* 🌟 Button Styles */
 .primary-btn {
     background: #4CAF50;
     color: #fff;
@@ -115,14 +117,7 @@ footer {
     background: #ddd;
 }
 
-/* 🌟 Responsive Footer */
-@media (max-width: 768px) {
-    .primary-btn, .secondary-btn {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-}
-/* Make the whole page take full height */
+        /* Make the whole page take full height */
 html, body {
     height: 100%;
     margin: 0;
@@ -377,55 +372,56 @@ footer {
             <i class="fa fa-spinner fa-spin" style="font-size: 24px; color: #FF4C4C;"></i>
             <p>Converting to PDF...</p>
         </div>
-              <!-- 🔹 Footer Section -->
+
+        <!-- 🌟 Footer Section -->
 <footer>
-    <div class="footer-container">
-
-        <!-- 🔹 Welcome Section -->
-        <div class="footer-section">
-            <h2>Welcome to Versa</h2>
-            <p>Your one-stop solution for all your PDF needs.</p>
-        </div>
-
-        <!-- 🔹 Quick Links -->
-        <div class="footer-section footer-links">
-            <h3>Quick Links</h3>
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
-            <a href="#">FAQ</a>
-        </div>
-
-        <!-- 🔹 Social Media -->
-        <div class="footer-section social-icons">
-            <h3>Stay Connected</h3>
-            <a href="#"><img src="facebook-icon.png" alt="Facebook" width="20"></a>
-            <a href="#"><img src="twitter-icon.png" alt="Twitter" width="20"></a>
-            <a href="#"><img src="instagram-icon.png" alt="Instagram" width="20"></a>
-        </div>
-
-        <!-- 🔹 Contact Info -->
-        <div class="footer-section">
-            <h3>Get in Touch</h3>
-            <p>📍 123 Main St, Anytown, USA</p>
-            <p>📞 +1 555 555 5555</p>
-            <p>✉ info@versa.com</p>
-        </div>
-
-        <!-- 🔹 Subscribe & Learn More -->
-        <div class="footer-section">
-            <h3>Stay Updated</h3>
-            <button class="primary-btn">Subscribe</button>
-            <button class="secondary-btn">Learn More</button>
-        </div>
-
+    <!-- 🔹 Top Section -->
+    <div class="footer-top">
+        <p>Welcome to Versa - Your one-stop solution for PDFs.</p>
     </div>
 
-    <!-- 🔹 Copyright Section -->
+    <!-- 🔹 Navigation Section -->
+    <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQ</a>
+    </div>
+
+    <!-- 🔹 Vertical Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- 🔹 Social Media Section -->
+    <div class="footer-section">
+        <h3>Stay Connected</h3>
+        <div class="social-icons">
+            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+        </div>
+    </div>
+
+    <!-- 🔹 Vertical Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- 🔹 Contact Section -->
+    <div class="footer-section">
+        <h3>Get in Touch</h3>
+        <p>📍 123 Main St, Anytown, USA</p>
+        <p>📞 +1 555 555 5555</p>
+        <p>✉ info@versa.com</p>
+    </div>
+
+    <!-- 🔹 Vertical Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- 🔹 Bottom Section -->
     <div class="footer-bottom">
         <p>© 2025 Versa. All Rights Reserved.</p>
     </div>
 </footer>
 
+        
     </div> <!-- ✅ Correctly closing the container -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
