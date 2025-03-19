@@ -15,6 +15,52 @@
             padding: 0;
             transition: background 0.3s, color 0.3s;
         }
+
+        /* 🌟 Primary Button */
+.primary-btn {
+    background: #4CAF50;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background: #45a049;
+}
+
+/* 🌟 Secondary Button */
+.secondary-btn {
+    background: transparent;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.secondary-btn:hover {
+    background: #ddd;
+}
+
+/* 🌟 Responsive Footer */
+@media (max-width: 768px) {
+    footer div {
+        padding: 15px;
+    }
+    .primary-btn, .secondary-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
         #image-preview {
     display: flex;
     flex-wrap: wrap;
@@ -54,6 +100,19 @@
     opacity: 1; /* Fade in to fully visible */
   }
 }
+        /* Make the whole page take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Push footer to the bottom */
+footer {
+    margin-top: auto;
+}
+
 
         .navbar {
             display: flex;
@@ -258,6 +317,60 @@
             <p>Converting to PDF...</p>
         </div>
 
+        <footer style="background-color: #f2f2f2; padding: 20px 0; font-family: 'Open Sans', sans-serif;">
+
+    <!-- 🔹 Top Section -->
+    <div style="padding: 20px; border-bottom: 1px solid #ccc; text-align: center;">
+        <h2 style="color: #333; font-size: 20px;">Welcome to Versa</h2>
+        <p style="color: #666; font-size: 14px;">Your one-stop solution for all your PDF needs.</p>
+    </div>
+
+    <!-- 🔹 Navigation Section -->
+    <div style="text-align: center; padding: 20px; border-bottom: 1px solid #ccc;">
+        <h3 style="color: #333; font-size: 16px; margin-bottom: 10px;">Quick Links</h3>
+        <a href="#" style="color: #333; font-size: 14px; margin: 0 15px; text-decoration: none;">About Us</a> |
+        <a href="#" style="color: #333; font-size: 14px; margin: 0 15px; text-decoration: none;">Contact Us</a> |
+        <a href="#" style="color: #333; font-size: 14px; margin: 0 15px; text-decoration: none;">FAQ</a>
+    </div>
+
+    <!-- 🔹 Social Media Section -->
+    <div style="text-align: center; padding: 20px; border-bottom: 1px solid #ccc;">
+        <h3 style="color: #333; font-size: 16px; margin-bottom: 10px;">Stay Connected</h3>
+        <a href="#" style="color: #333; font-size: 20px; margin: 0 10px;">
+            <img src="facebook-icon.png" alt="Facebook" width="20">
+        </a>
+        <a href="#" style="color: #333; font-size: 20px; margin: 0 10px;">
+            <img src="twitter-icon.png" alt="Twitter" width="20">
+        </a>
+        <a href="#" style="color: #333; font-size: 20px; margin: 0 10px;">
+            <img src="instagram-icon.png" alt="Instagram" width="20">
+        </a>
+    </div>
+
+    <!-- 🔹 Contact Section -->
+    <div style="text-align: center; padding: 20px; border-bottom: 1px solid #ccc;">
+        <h3 style="color: #333; font-size: 16px; margin-bottom: 10px;">Get in Touch</h3>
+        <p style="color: #333; font-size: 14px; margin: 5px 0;">📍 123 Main St, Anytown, USA</p>
+        <p style="color: #333; font-size: 14px; margin: 5px 0;">📞 +1 555 555 5555</p>
+        <p style="color: #333; font-size: 14px; margin: 5px 0;">✉ info@versa.com</p>
+    </div>
+
+    <!-- 🔹 Button Section -->
+    <div style="text-align: center; padding: 20px; border-bottom: 1px solid #ccc;">
+        <h3 style="color: #333; font-size: 16px; margin-bottom: 10px;">Stay Updated</h3>
+        <button class="primary-btn">Subscribe</button>
+        <button class="secondary-btn">Learn More</button>
+    </div>
+
+    <!-- 🔹 Bottom Section -->
+    <div style="text-align: center; padding: 20px; border-top: 1px solid #ccc;">
+        <p style="color: #666; font-size: 12px;">© 2025 Versa. All Rights Reserved.</p>
+    </div>
+
+</footer>
+
+
+        
     </div> <!-- ✅ Correctly closing the container -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
