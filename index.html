@@ -438,54 +438,56 @@ footer {
                 return;
             }
 
-            document.getElementById("convertBtn").addEventListener("click", function () {
-    const { jsPDF } = window.jspdf;
-    let pdf = new jsPDF({ unit: "mm", format: "a4" });
+            document.getElementById('loading-spinner').style.display = 'block'; // Show loading
 
-    let images = document.querySelectorAll(".image-preview img");
-    if (images.length === 0) {
-        alert("Please upload at least one image.");
-        return;
-    }
+            setTimeout(() => {
+                images.forEach((img, index) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    ctx.drawImage(img, 0, 0);
+                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-    let pageWidth = 210; // A4 width in mm
-    let pageHeight = 297; // A4 height in mm
+                    // ✅ Proper A4 page size in points
+                    const a4Width = 595.28;  
+                    const a4Height = 841.89; 
+                    const margin = 20;
 
-    images.forEach((img, index) => {
-        let imgWidth = img.naturalWidth;
-        let imgHeight = img.naturalHeight;
-        let aspectRatio = imgWidth / imgHeight;
+                    // ✅ Get image dimensions and aspect ratio
+                    let imgWidth = img.naturalWidth * 0.75; // Convert pixels to points
+                    let imgHeight = img.naturalHeight * 0.75;
+                    const imgAspectRatio = imgWidth / imgHeight;
 
-        // Scale image while maintaining aspect ratio
-        let newWidth = pageWidth; 
-        let newHeight = pageWidth / aspectRatio; 
+                    // ✅ Fit image inside A4 without enlarging
+                    if (imgWidth > a4Width - 2 * margin || imgHeight > a4Height - 2 * margin) {
+                        if (imgAspectRatio > 1) {
+                            imgWidth = a4Width - 2 * margin;
+                            imgHeight = imgWidth / imgAspectRatio;
+                        } else {
+                            imgHeight = a4Height - 2 * margin;
+                            imgWidth = imgHeight * imgAspectRatio;
+                        }
+                    }
 
-        if (newHeight > pageHeight) {
-            newHeight = pageHeight;
-            newWidth = pageHeight * aspectRatio;
-        }
+                    // ✅ Center the image
+                    const x = (a4Width - imgWidth) / 2;
+                    const y = (a4Height - imgHeight) / 2;
 
-        // Centering the image
-        let xOffset = (pageWidth - newWidth) / 2;
-        let yOffset = (pageHeight - newHeight) / 2;
+                    if (index > 0) pdf.addPage();
+                    pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
+                });
 
-        // Convert image to base64 and add to PDF
-        let canvas = document.createElement("canvas");
-        let ctx = canvas.getContext("2d");
-        canvas.width = imgWidth;
-        canvas.height = imgHeight;
-        ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
-        let imgData = canvas.toDataURL("image/jpeg", 1.0);
+                document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
+                document.getElementById('download-btn').style.display = 'block'; // Show download button
+            }, 2000);
+        });
 
-        pdf.addImage(imgData, "JPEG", xOffset, yOffset, newWidth, newHeight);
-
-        if (index < images.length - 1) {
-            pdf.addPage();
-        }
-    });
-
-    pdf.save("converted.pdf");
-});
+        document.getElementById('download-btn').addEventListener('click', function() {
+            if (pdf) {
+                pdf.save('converted.pdf');
+            }
+        });
 
     </script>
     
