@@ -440,6 +440,27 @@ footer {
     document.getElementById('loading-spinner').style.display = 'block'; // Show loading
 
     setTimeout(() => {
+        let totalHeight = 0; // Track total height of all images
+        let maxWidth = 0; // Track max width for PDF size
+
+        // First loop to calculate total PDF size
+        images.forEach(img => {
+            const imgWidth = img.naturalWidth * 0.24;
+            const imgHeight = img.naturalHeight * 0.24;
+            totalHeight += imgHeight;
+            maxWidth = Math.max(maxWidth, imgWidth);
+        });
+
+        // ✅ Create PDF with total height and max width
+        pdf = new jsPDF({
+            orientation: maxWidth > totalHeight ? 'landscape' : 'portrait',
+            unit: 'pt',
+            format: [maxWidth, totalHeight]
+        });
+
+        let yOffset = 0; // Start position for first image
+
+        // Second loop to add images in a stacked manner
         images.forEach((img, index) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -448,19 +469,12 @@ footer {
             ctx.drawImage(img, 0, 0);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ Fix: Set PDF size equal to image size
-            const imgWidth = img.naturalWidth * 0.24; // Convert pixels to points
+            const imgWidth = img.naturalWidth * 0.24;
             const imgHeight = img.naturalHeight * 0.24;
-            pdf = new jsPDF({
-                orientation: imgWidth > imgHeight ? 'landscape' : 'portrait',
-                unit: 'pt',
-                format: [imgWidth, imgHeight]
-            });
 
-            // ✅ Add image to PDF at (0,0) to perfectly fit
-            pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
-
-            if (index > 0) pdf.addPage();
+            // ✅ Add image at correct position
+            pdf.addImage(imgData, 'JPEG', 0, yOffset, imgWidth, imgHeight);
+            yOffset += imgHeight; // Move down for next image
         });
 
         document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
