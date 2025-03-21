@@ -472,9 +472,9 @@ footer {
                 }
             }
 
-            // ✅ Move the image up and left
-            const x = (a4Width - imgWidth) / 2 - 20; // Shift left
-            const y = (a4Height - imgHeight) / 2 - 50; // Move up (Increase this value to move more up)
+            // ✅ Perfect Centering Fix
+            const x = (a4Width - imgWidth) / 2;  // Center horizontally
+            const y = (a4Height - imgHeight) / 2 - 30;  // Move up slightly for perfect centering
 
             if (index > 0) pdf.addPage();
             pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
@@ -490,6 +490,7 @@ document.getElementById('download-btn').addEventListener('click', function () {
         pdf.save('converted.pdf');
     }
 });
+
 
 
     </script>
