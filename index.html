@@ -570,19 +570,21 @@ document.getElementById('download-btn').addEventListener('click', function() {
         pdf.save('converted.pdf');
     }
 });
-document.querySelector('.profile-pic').addEventListener('click', function(event) {
+// Toggle account popup
+document.getElementById('account-btn').addEventListener('click', function() {
     let popup = document.getElementById('account-popup');
     popup.classList.toggle('show');
-    event.stopPropagation(); // Prevents popup from closing immediately
 });
 
 // Close popup when clicking outside
 document.addEventListener('click', function(event) {
     let popup = document.getElementById('account-popup');
-    if (!popup.contains(event.target)) {
+    let button = document.getElementById('account-btn');
+    if (!button.contains(event.target) && !popup.contains(event.target)) {
         popup.classList.remove('show');
     }
 });
+
 
 
 
