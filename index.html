@@ -428,7 +428,7 @@ footer {
     <script>
         let pdf; // Stores the generated PDF
 
-        document.getElementById('convert-btn').addEventListener('click', function () {
+       document.getElementById('convert-btn').addEventListener('click', function () {
     const { jsPDF } = window.jspdf;
     pdf = new jsPDF();
     const images = document.querySelectorAll('#image-preview img');
@@ -442,11 +442,13 @@ footer {
 
     setTimeout(() => {
         images.forEach((img, index) => {
+            // 🌟 Create a smaller canvas to shrink the image
+            const scaleFactor = 0.1; // Shrinks the image to 10% of its original size
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            ctx.drawImage(img, 0, 0);
+            canvas.width = img.naturalWidth * scaleFactor;
+            canvas.height = img.naturalHeight * scaleFactor;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
             // ✅ A4 Page Dimensions (in Points)
@@ -454,9 +456,9 @@ footer {
             const a4Height = 841.89;
             const margin = 20;
 
-            // ✅ Convert image size from pixels to points (1px ≈ 0.24pt)
-            let imgWidth = img.naturalWidth * 0.24;
-            let imgHeight = img.naturalHeight * 0.24;
+            // ✅ Convert image size from pixels to points
+            let imgWidth = canvas.width * 0.75; 
+            let imgHeight = canvas.height * 0.75;
             const imgAspectRatio = imgWidth / imgHeight;
 
             // ✅ Fit image inside A4 while keeping aspect ratio
@@ -470,9 +472,9 @@ footer {
                 }
             }
 
-            // ✅ **Ensure Correct Centering**
+            // ✅ Centering
             const x = (a4Width - imgWidth) / 2;
-            const y = (a4Height - imgHeight) / 2; 
+            const y = (a4Height - imgHeight) / 2;
 
             if (index > 0) pdf.addPage();
             pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
@@ -488,6 +490,7 @@ document.getElementById('download-btn').addEventListener('click', function () {
         pdf.save('converted.pdf');
     }
 });
+
 
     </script>
     
