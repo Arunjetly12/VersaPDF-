@@ -209,6 +209,21 @@ footer {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     border: none;
 }
+/* Use only one account button (your existing one) */
+.account-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: url('https://i.postimg.cc/VvwnKx7X/profile-8861091.png') no-repeat center/cover;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border: none;
+    position: fixed; /* Keep it on the right */
+    top: 10px;
+    right: 10px; /* Adjust as needed */
+}
+
+/* Popup styles */
 .account-popup {
     position: absolute;
     top: 50px;
@@ -228,6 +243,7 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+
 .account-header {
     text-align: center;
     padding: 10px 0;
@@ -334,7 +350,7 @@ footer {
                 <img src="https://i.postimg.cc/vHNDTRWX/freepik-colorful-creative-publishing-company-logo-20250318050310i6s9.png" alt="Logo">
             </a>
             <div class="account-container">
-    <button id="account-btn" class="account-btn"></button>
+    <button id="account-btn" class="account-btn"></button> 
     <div id="account-popup" class="account-popup">
         <div class="account-header">
             <div class="profile-pic"></div>
@@ -347,6 +363,7 @@ footer {
         </div>
     </div>
 </div>
+
 
         </div>
         <div class="nav-links">
