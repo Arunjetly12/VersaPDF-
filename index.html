@@ -196,10 +196,13 @@ footer {
         .navbar .nav-links a:hover {
             color: #FF4C4C;
         }
-        .account-container {
+        /* Account button container */
+.account-container {
     position: relative;
     display: inline-block;
 }
+
+/* Account button (Fixed on the right side) */
 .account-btn {
     width: 40px;
     height: 40px;
@@ -208,22 +211,12 @@ footer {
     cursor: pointer;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     border: none;
-}
-/* Use only one account button (your existing one) */
-.account-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: url('https://i.postimg.cc/VvwnKx7X/profile-8861091.png') no-repeat center/cover;
-    cursor: pointer;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    border: none;
-    position: fixed; /* Keep it on the right */
+    position: fixed;
     top: 10px;
-    right: 10px; /* Adjust as needed */
+    right: 10px;
 }
 
-/* Popup styles */
+/* Popup container */
 .account-popup {
     position: absolute;
     top: 50px;
@@ -238,16 +231,20 @@ footer {
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+/* Show popup */
 .account-popup.show {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
 
+/* Profile section inside popup */
 .account-header {
     text-align: center;
     padding: 10px 0;
 }
+
 .profile-pic {
     width: 50px;
     height: 50px;
@@ -255,10 +252,13 @@ footer {
     background: url('https://i.postimg.cc/VvwnKx7X/profile-8861091.png') no-repeat center/cover;
     margin: 0 auto;
 }
+
+/* Options inside popup */
 .account-body {
     display: flex;
     flex-direction: column;
 }
+
 .account-option {
     background: none;
     border: none;
@@ -267,9 +267,11 @@ footer {
     cursor: pointer;
     width: 100%;
 }
+
 .account-option.logout {
     color: red;
 }
+
 .account-option:hover {
     background: #f5f5f5;
 }
@@ -363,7 +365,6 @@ footer {
         </div>
     </div>
 </div>
-
 
         </div>
         <div class="nav-links">
@@ -570,11 +571,13 @@ document.getElementById('download-btn').addEventListener('click', function() {
         pdf.save('converted.pdf');
     }
 });
+// Toggle account popup
 document.getElementById('account-btn').addEventListener('click', function() {
     let popup = document.getElementById('account-popup');
     popup.classList.toggle('show');
 });
 
+// Close popup when clicking outside
 document.addEventListener('click', function(event) {
     let popup = document.getElementById('account-popup');
     let button = document.getElementById('account-btn');
