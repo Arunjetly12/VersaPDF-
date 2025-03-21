@@ -430,7 +430,6 @@ footer {
 
        document.getElementById('convert-btn').addEventListener('click', function () {
     const { jsPDF } = window.jspdf;
-    pdf = new jsPDF();
     const images = document.querySelectorAll('#image-preview img');
 
     if (images.length === 0) {
@@ -442,53 +441,33 @@ footer {
 
     setTimeout(() => {
         images.forEach((img, index) => {
-            // 🌟 Create a smaller canvas to shrink the image
-            const scaleFactor = 0.1; // Shrinks the image to 10% of its original size
+            // 🌟 Create a canvas to get image size
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = img.naturalWidth * scaleFactor;
-            canvas.height = img.naturalHeight * scaleFactor;
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            ctx.drawImage(img, 0, 0);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ A4 Page Dimensions (in Points)
-            const a4Width = 595.28;
-            const a4Height = 841.89;
-            const margin = 20;
+            // ✅ Set PDF size = Image size (in points)
+            const imgWidth = img.naturalWidth * 0.24; // Convert pixels to points
+            const imgHeight = img.naturalHeight * 0.24;
+            const pdf = new jsPDF({
+                orientation: imgWidth > imgHeight ? 'landscape' : 'portrait',
+                unit: 'pt',
+                format: [imgWidth, imgHeight]
+            });
 
-            // ✅ Convert image size from pixels to points
-            let imgWidth = canvas.width * 0.75; 
-            let imgHeight = canvas.height * 0.75;
-            const imgAspectRatio = imgWidth / imgHeight;
+            // ✅ Add image to perfectly fit the PDF page
+            pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
 
-            // ✅ Fit image inside A4 while keeping aspect ratio
-            if (imgWidth > a4Width - 2 * margin || imgHeight > a4Height - 2 * margin) {
-                if (imgAspectRatio > 1) {
-                    imgWidth = a4Width - 2 * margin;
-                    imgHeight = imgWidth / imgAspectRatio;
-                } else {
-                    imgHeight = a4Height - 2 * margin;
-                    imgWidth = imgHeight * imgAspectRatio;
-                }
+            if (index === images.length - 1) {
+                document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
+                document.getElementById('download-btn').style.display = 'block'; // Show download button
+                pdf.save('converted.pdf'); // Auto-download after conversion
             }
-
-            // ✅ Perfect Centering Fix
-            const x = (a4Width - imgWidth) / 2;  // Center horizontally
-            const y = (a4Height - imgHeight) / 2 - 30;  // Move up slightly for perfect centering
-
-            if (index > 0) pdf.addPage();
-            pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
         });
-
-        document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
-        document.getElementById('download-btn').style.display = 'block'; // Show download button
     }, 2000);
-});
-
-document.getElementById('download-btn').addEventListener('click', function () {
-    if (pdf) {
-        pdf.save('converted.pdf');
-    }
 });
 
 
