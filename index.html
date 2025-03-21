@@ -449,25 +449,26 @@ document.getElementById('convert-btn').addEventListener('click', function() {
             ctx.drawImage(img, 0, 0);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ Set PDF size to match the original image size
+            // ✅ Set PDF size to match the original image size + extra gap
             const imgWidth = img.naturalWidth * 0.75; // Convert pixels to points
             const imgHeight = img.naturalHeight * 0.75;
+            const pageGap = 30; // 🔥 Add 30pt gap between pages
 
             if (index === 0) {
                 pdf = new jsPDF({
                     orientation: imgWidth > imgHeight ? 'landscape' : 'portrait',
                     unit: 'pt',
-                    format: [imgWidth, imgHeight]
+                    format: [imgWidth, imgHeight + pageGap] // 🔥 Increase page height
                 });
             } else {
-                pdf.addPage([imgWidth, imgHeight]); // New page with original image size
+                pdf.addPage([imgWidth, imgHeight + pageGap]); // 🔥 Add gap on new pages
             }
 
             // ✅ Calculate X and Y to center the image
             const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
             const x = (pageWidth - imgWidth) / 2;
-            const y = (pageHeight - imgHeight) / 2;
+            const y = ((pageHeight - imgHeight) / 2) - (pageGap / 2); // 🔥 Adjust for gap
 
             // ✅ Add image in the center
             pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
