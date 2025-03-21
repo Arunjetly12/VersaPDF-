@@ -472,9 +472,9 @@ footer {
                 }
             }
 
-            // ✅ Move the image slightly to the left
-            const x = (a4Width - imgWidth) / 2 - 20; // Shift 20 points left
-            const y = (a4Height - imgHeight) / 2;
+            // ✅ Move the image up and left
+            const x = (a4Width - imgWidth) / 2 - 20; // Shift left
+            const y = (a4Height - imgHeight) / 2 - 50; // Move up (Increase this value to move more up)
 
             if (index > 0) pdf.addPage();
             pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
