@@ -428,7 +428,7 @@ footer {
     <script>
         let pdf; // Stores the generated PDF
 
-        document.getElementById('convert-btn').addEventListener('click', function() {
+        document.getElementById('convert-btn').addEventListener('click', function () {
     const { jsPDF } = window.jspdf;
     pdf = new jsPDF();
     const images = document.querySelectorAll('#image-preview img');
@@ -454,8 +454,8 @@ footer {
             const a4Height = 841.89; 
             const margin = 20;
 
-            // ✅ Get original image dimensions (converted to points)
-            let imgWidth = img.naturalWidth * 0.24; // Convert pixels to points
+            // ✅ Convert image size from pixels to points
+            let imgWidth = img.naturalWidth * 0.24; 
             let imgHeight = img.naturalHeight * 0.24;
             const imgAspectRatio = imgWidth / imgHeight;
 
@@ -470,9 +470,9 @@ footer {
                 }
             }
 
-            // ✅ Proper Centering Calculation
+            // ✅ Proper Centering
             const x = (a4Width - imgWidth) / 2;
-            const y = (a4Height - imgHeight) / 2;
+            const y = (a4Height - imgHeight) / 2; 
 
             if (index > 0) pdf.addPage();
             pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
@@ -483,7 +483,7 @@ footer {
     }, 2000);
 });
 
-document.getElementById('download-btn').addEventListener('click', function() {
+document.getElementById('download-btn').addEventListener('click', function () {
     if (pdf) {
         pdf.save('converted.pdf');
     }
