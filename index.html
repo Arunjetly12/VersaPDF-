@@ -199,11 +199,12 @@ footer {
         }
         /* Account button container */
 .account-container {
-    position: relative;
-    display: inline-block;
+    position: fixed; /* Keeps it in place */
+    top: 10px;
+    right: 10px;
 }
 
-/* Account button (Fixed on the right side) */
+/* Account button */
 .account-btn {
     width: 40px;
     height: 40px;
@@ -212,9 +213,6 @@ footer {
     cursor: pointer;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     border: none;
-    position: absolute; /* Change from fixed to absolute */
-    top: 10px;
-    right: 10px;
 }
 
 /* Popup container */
@@ -360,6 +358,7 @@ footer {
         </div>        
       <div class="account-btn"></div>
         <div class="account-container">
+    <button id="account-btn" class="account-btn"></button> 
     <div id="account-popup" class="account-popup">
         <div class="account-header">
             <div class="profile-pic"></div>
@@ -372,6 +371,7 @@ footer {
         </div>
     </div>
 </div>
+
     </nav>
     <div class="container">
         <h1>Convert Images to PDF</h1>
