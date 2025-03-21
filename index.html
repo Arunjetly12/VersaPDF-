@@ -571,20 +571,20 @@ document.getElementById('download-btn').addEventListener('click', function() {
         pdf.save('converted.pdf');
     }
 });
-// Toggle account popup
-document.getElementById('account-btn').addEventListener('click', function() {
+document.querySelector('.profile-pic').addEventListener('click', function(event) {
     let popup = document.getElementById('account-popup');
     popup.classList.toggle('show');
+    event.stopPropagation(); // Prevents popup from closing immediately
 });
 
 // Close popup when clicking outside
 document.addEventListener('click', function(event) {
     let popup = document.getElementById('account-popup');
-    let button = document.getElementById('account-btn');
-    if (!button.contains(event.target) && !popup.contains(event.target)) {
+    if (!popup.contains(event.target)) {
         popup.classList.remove('show');
     }
 });
+
 
 
     </script>
