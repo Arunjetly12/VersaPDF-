@@ -428,7 +428,7 @@ footer {
     <script>
         let pdf; // Stores the generated PDF
 
-        document.getElementById('convert-btn').addEventListener('click', function () {
+        document.getElementById('convert-btn').addEventListener('click', function() {
     const { jsPDF } = window.jspdf;
     pdf = new jsPDF();
     const images = document.querySelectorAll('#image-preview img');
@@ -449,30 +449,30 @@ footer {
             ctx.drawImage(img, 0, 0);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ A4 page size in points
-            const a4Width = 595.28;
-            const a4Height = 841.89;
+            // ✅ A4 Page Dimensions (in Points)
+            const a4Width = 595.28;  
+            const a4Height = 841.89; 
             const margin = 20;
 
-            // ✅ Original image size in points
-            let imgWidth = img.naturalWidth * 0.75;
-            let imgHeight = img.naturalHeight * 0.75;
-            const aspectRatio = imgWidth / imgHeight;
+            // ✅ Get original image dimensions (converted to points)
+            let imgWidth = img.naturalWidth * 0.24; // Convert pixels to points
+            let imgHeight = img.naturalHeight * 0.24;
+            const imgAspectRatio = imgWidth / imgHeight;
 
-            // ✅ Scale image if it's larger than A4
+            // ✅ Fit image inside A4 while maintaining aspect ratio
             if (imgWidth > a4Width - 2 * margin || imgHeight > a4Height - 2 * margin) {
-                if (aspectRatio > 1) {
+                if (imgAspectRatio > 1) {
                     imgWidth = a4Width - 2 * margin;
-                    imgHeight = imgWidth / aspectRatio;
+                    imgHeight = imgWidth / imgAspectRatio;
                 } else {
                     imgHeight = a4Height - 2 * margin;
-                    imgWidth = imgHeight * aspectRatio;
+                    imgWidth = imgHeight * imgAspectRatio;
                 }
             }
 
-            // ✅ Perfectly center the image on A4
+            // ✅ Proper Centering Calculation
             const x = (a4Width - imgWidth) / 2;
-            const y = (a4Height - imgHeight) / 2; // **Fix: Proper vertical centering**
+            const y = (a4Height - imgHeight) / 2;
 
             if (index > 0) pdf.addPage();
             pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
@@ -483,7 +483,7 @@ footer {
     }, 2000);
 });
 
-document.getElementById('download-btn').addEventListener('click', function () {
+document.getElementById('download-btn').addEventListener('click', function() {
     if (pdf) {
         pdf.save('converted.pdf');
     }
