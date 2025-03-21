@@ -430,8 +430,7 @@ footer {
 
 document.getElementById('convert-btn').addEventListener('click', function() {
     const { jsPDF } = window.jspdf;
-    let pdf = null; // ✅ Declare PDF globally
-
+    pdf = new jsPDF();
     const images = document.querySelectorAll('#image-preview img');
 
     if (images.length === 0) {
@@ -450,22 +449,14 @@ document.getElementById('convert-btn').addEventListener('click', function() {
             ctx.drawImage(img, 0, 0);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ Set PDF size = Image size (in points)
+            // ✅ Fix: Set PDF size = Image size (in points)
             const imgWidth = img.naturalWidth * 0.24; // Convert pixels to points
             const imgHeight = img.naturalHeight * 0.24;
 
-            // ✅ Create new PDF for the first image
-            if (index === 0) {
-                pdf = new jsPDF({
-                    orientation: imgWidth > imgHeight ? 'landscape' : 'portrait',
-                    unit: 'pt',
-                    format: [imgWidth, imgHeight]
-                });
-            } else {
-                pdf.addPage([imgWidth, imgHeight]); // Add new page with exact image size
-            }
+            // ✅ Create a new page with the exact image size
+            if (index > 0) pdf.addPage([imgWidth, imgHeight]);
 
-            // ✅ Add image to fit exactly
+            // ✅ Add image at (0,0) to perfectly fit
             pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
         });
 
@@ -474,7 +465,6 @@ document.getElementById('convert-btn').addEventListener('click', function() {
     }, 2000);
 });
 
-// ✅ Download button now works properly
 document.getElementById('download-btn').addEventListener('click', function() {
     if (pdf) {
         pdf.save('converted.pdf');
