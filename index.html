@@ -428,7 +428,9 @@ footer {
     <script>
         let pdf; // Stores the generated PDF
 
-       document.getElementById('convert-btn').addEventListener('click', function() {
+      let pdf; // ✅ Declare PDF globally so download works
+
+document.getElementById('convert-btn').addEventListener('click', function() {
     const { jsPDF } = window.jspdf;
     const images = document.querySelectorAll('#image-preview img');
 
@@ -440,8 +442,6 @@ footer {
     document.getElementById('loading-spinner').style.display = 'block'; // Show loading
 
     setTimeout(() => {
-        let pdf; // Declare PDF variable
-
         images.forEach((img, index) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -474,11 +474,15 @@ footer {
     }, 2000);
 });
 
+// ✅ Now the download button will work
 document.getElementById('download-btn').addEventListener('click', function() {
     if (pdf) {
         pdf.save('converted.pdf');
+    } else {
+        alert('Please convert images first!');
     }
 });
+
 
     </script>
     
