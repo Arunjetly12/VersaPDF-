@@ -428,48 +428,66 @@ footer {
     <script>
         let pdf; // Stores the generated PDF
 
-       document.getElementById('convert-btn').addEventListener('click', function () {
-    const { jsPDF } = window.jspdf;
-    const images = document.querySelectorAll('#image-preview img');
+       document.getElementById('convert-btn').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            pdf = new jsPDF();
+            const images = document.querySelectorAll('#image-preview img');
 
-    if (images.length === 0) {
-        alert('Please upload at least one image.');
-        return;
-    }
+            if (images.length === 0) {
+                alert('Please upload at least one image.');
+                return;
+            }
 
-    document.getElementById('loading-spinner').style.display = 'block'; // Show loading
+            document.getElementById('loading-spinner').style.display = 'block'; // Show loading
 
-    setTimeout(() => {
-        images.forEach((img, index) => {
-            // 🌟 Create a canvas to get image size
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            ctx.drawImage(img, 0, 0);
-            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+            setTimeout(() => {
+                images.forEach((img, index) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    ctx.drawImage(img, 0, 0);
+                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ Set PDF size = Image size (in points)
-            const imgWidth = img.naturalWidth * 0.24; // Convert pixels to points
-            const imgHeight = img.naturalHeight * 0.24;
-            const pdf = new jsPDF({
-                orientation: imgWidth > imgHeight ? 'landscape' : 'portrait',
-                unit: 'pt',
-                format: [imgWidth, imgHeight]
-            });
+                    // ✅ Proper A4 page size in points
+                    const a4Width = 595.28;  
+                    const a4Height = 841.89; 
+                    const margin = 20;
 
-            // ✅ Add image to perfectly fit the PDF page
-            pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                    // ✅ Get image dimensions and aspect ratio
+                    let imgWidth = img.naturalWidth * 0.75; // Convert pixels to points
+                    let imgHeight = img.naturalHeight * 0.75;
+                    const imgAspectRatio = imgWidth / imgHeight;
 
-            if (index === images.length - 1) {
+                    // ✅ Fit image inside A4 without enlarging
+                    if (imgWidth > a4Width - 2 * margin || imgHeight > a4Height - 2 * margin) {
+                        if (imgAspectRatio > 1) {
+                            imgWidth = a4Width - 2 * margin;
+                            imgHeight = imgWidth / imgAspectRatio;
+                        } else {
+                            imgHeight = a4Height - 2 * margin;
+                            imgWidth = imgHeight * imgAspectRatio;
+                        }
+                    }
+
+                    // ✅ Center the image
+                    const x = (a4Width - imgWidth) / 2;
+                    const y = (a4Height - imgHeight) / 2;
+
+                    if (index > 0) pdf.addPage();
+                    pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
+                });
+
                 document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
                 document.getElementById('download-btn').style.display = 'block'; // Show download button
-                pdf.save('converted.pdf'); // Auto-download after conversion
+            }, 2000);
+        });
+
+        document.getElementById('download-btn').addEventListener('click', function() {
+            if (pdf) {
+                pdf.save('converted.pdf');
             }
         });
-    }, 2000);
-});
-
 
 
     </script>
