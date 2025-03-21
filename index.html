@@ -448,24 +448,23 @@ footer {
             ctx.drawImage(img, 0, 0);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ Set PDF size = Image size (in points)
+            // ✅ Fix: Set PDF size equal to image size
             const imgWidth = img.naturalWidth * 0.24; // Convert pixels to points
             const imgHeight = img.naturalHeight * 0.24;
-            const pdf = new jsPDF({
+            pdf = new jsPDF({
                 orientation: imgWidth > imgHeight ? 'landscape' : 'portrait',
                 unit: 'pt',
                 format: [imgWidth, imgHeight]
             });
 
-            // ✅ Add image to perfectly fit the PDF page
+            // ✅ Add image to PDF at (0,0) to perfectly fit
             pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
 
-            if (index === images.length - 1) {
-                document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
-                document.getElementById('download-btn').style.display = 'block'; // Show download button
-                pdf.save('converted.pdf'); // Auto-download after conversion
-            }
+            if (index > 0) pdf.addPage();
         });
+
+        document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
+        document.getElementById('download-btn').style.display = 'block'; // Show download button
     }, 2000);
 });
 
