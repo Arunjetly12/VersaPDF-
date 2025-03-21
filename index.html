@@ -429,6 +429,7 @@ footer {
         let pdf; // Stores the generated PDF
 
       let pdf; // ✅ Declare PDF globally so download works
+let pdf = null; // ✅ Declare PDF globally so download works
 
 document.getElementById('convert-btn').addEventListener('click', function() {
     const { jsPDF } = window.jspdf;
@@ -442,6 +443,8 @@ document.getElementById('convert-btn').addEventListener('click', function() {
     document.getElementById('loading-spinner').style.display = 'block'; // Show loading
 
     setTimeout(() => {
+        pdf = null; // Reset PDF before creating a new one
+
         images.forEach((img, index) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -455,7 +458,7 @@ document.getElementById('convert-btn').addEventListener('click', function() {
             const imgHeight = img.naturalHeight * 0.24;
 
             // ✅ Create PDF on first image
-            if (index === 0) {
+            if (!pdf) {
                 pdf = new jsPDF({
                     orientation: imgWidth > imgHeight ? 'landscape' : 'portrait',
                     unit: 'pt',
@@ -474,7 +477,7 @@ document.getElementById('convert-btn').addEventListener('click', function() {
     }, 2000);
 });
 
-// ✅ Now the download button will work
+// ✅ Now the download button will work properly
 document.getElementById('download-btn').addEventListener('click', function() {
     if (pdf) {
         pdf.save('converted.pdf');
