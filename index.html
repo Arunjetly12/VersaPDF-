@@ -472,8 +472,8 @@ footer {
                 }
             }
 
-            // ✅ Centering
-            const x = (a4Width - imgWidth) / 2;
+            // ✅ Move the image slightly to the left
+            const x = (a4Width - imgWidth) / 2 - 20; // Shift 20 points left
             const y = (a4Height - imgHeight) / 2;
 
             if (index > 0) pdf.addPage();
