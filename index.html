@@ -289,7 +289,7 @@ footer {
 .account-popup {
     position: absolute;
     top: 50px;
-    right: 0;
+    left: 0; /* 🔹 Aligns the popup to the left */
     background: white;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border-radius: 10px;
@@ -299,7 +299,7 @@ footer {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 999; /* Ensures it appears above other elements */
+    z-index: 999;
 }
 
 /* Show popup */
