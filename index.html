@@ -524,26 +524,7 @@ document.addEventListener("DOMContentLoaded", function () {
     width: 100%;
 "></div>
 
-        <script>
-    document.getElementById('file-input').addEventListener('change', function(event) {
-        const files = event.target.files;
-        const preview = document.getElementById('image-preview');
-        preview.innerHTML = ''; // Clear previous previews
-
-        for (let file of files) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.width = '100px';
-                img.style.height = '100px';
-                img.style.objectFit = 'cover';
-                img.style.borderRadius = '8px';
-                preview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    
 </script>
         <script>
     document.getElementById('file-input').addEventListener('change', function(event) {
