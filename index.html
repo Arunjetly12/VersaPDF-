@@ -135,6 +135,63 @@ html, body {
     flex-direction: column;
 }
 
+        .about-us {
+    background: #f8f9fa;
+    padding: 50px 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-top: 40px;
+}
+
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-us h2 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+}
+
+.about-us p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 220px;
+    text-align: center;
+}
+
+.feature-item i {
+    font-size: 30px;
+    color: #ff6f00;
+    margin-bottom: 10px;
+}
+
+.feature-item h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.feature-item p {
+    font-size: 14px;
+    color: #666;
+}
+
 /* Push footer to the bottom */
 footer {
     margin-top: auto;
@@ -564,6 +621,31 @@ document.addEventListener("DOMContentLoaded", function () {
             <i class="fa fa-spinner fa-spin" style="font-size: 24px; color: #FF4C4C;"></i>
             <p>Converting to PDF...</p>
         </div>
+         <!-- 🌟 About Us Section (Placed Above Footer) -->
+<section class="about-us">
+    <div class="about-container">
+        <h2>About Us</h2>
+        <p>Welcome to Versa - Your one-stop solution for PDFs. We provide a fast and simple way to convert images to high-quality PDFs.</p>
+
+        <div class="features">
+            <div class="feature-item">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast & Efficient</h3>
+                <p>Convert images to PDFs in seconds with our optimized tool.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-lock"></i>
+                <h3>Secure & Private</h3>
+                <p>Your files are processed securely with no data stored.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-magic"></i>
+                <h3>Easy to Use</h3>
+                <p>Drag & drop, edit, and download PDFs hassle-free.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- 🌟 Footer Section -->
 <footer>
