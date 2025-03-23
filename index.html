@@ -660,7 +660,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <!-- 🔹 Navigation Section -->
     <div class="footer-section">
         <h3>Quick Links</h3>
-        <a href="#">About Us</a>
+        <a href="#about" onclick="scrollToAbout(event)">About Us</a>
         <a href="#">Contact Us</a>
         <a href="#">FAQ</a>
     </div>
@@ -695,7 +695,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <!-- 🔹 Bottom Section -->
     <div class="footer-bottom">
-        <section id="about" class="about-us">
         <p>© 2025 Versa. All Rights Reserved.</p>
     </div>
 </footer>
@@ -778,13 +777,15 @@ document.addEventListener('click', function(event) {
 });
       
   <script>
-    function scrollToAbout() {
+    function scrollToAbout(event) {
+        event.preventDefault(); // ⛔ Prevent page jump to top
         const aboutSection = document.getElementById("about");
         if (aboutSection) {
             aboutSection.scrollIntoView({ behavior: "smooth" });
         }
     }
 </script>
+
 
 
 </body>
