@@ -778,7 +778,7 @@ document.addEventListener('click', function(event) {
       
   <script>
     function scrollToAbout(event) {
-        event.preventDefault(); // ⛔ Prevent page jump to top
+        event.preventDefault(); // ⛔ Prevents instant jumping
         const aboutSection = document.getElementById("about");
         if (aboutSection) {
             aboutSection.scrollIntoView({ behavior: "smooth" });
