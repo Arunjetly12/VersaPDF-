@@ -401,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const uploadArea = document.querySelector('.upload-area');
     const fileInput = document.getElementById('file-input');
     const imagePreview = document.getElementById('image-preview');
-    const uploadBtn = document.getElementById('upload-btn'); 
+    const uploadBtn = document.querySelector('.btn-primary'); // Fix: Target the button correctly
 
     if (!uploadArea || !fileInput || !imagePreview || !uploadBtn) {
         console.error("One or more elements not found!");
@@ -411,13 +411,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Store uploaded files to prevent duplicates
     let uploadedFiles = new Set();
 
-    // ✅ Fix: Ensure button doesn't double-trigger uploads
+    // ✅ Fix: Prevents duplicate uploads
     uploadBtn.addEventListener('click', function () {
         fileInput.value = ''; // Clear input before opening (fixes duplicate issue)
         fileInput.click(); 
     });
 
-    // Handle file selection when clicking "Upload Images"
+    // ✅ Fix: Remove old function that added images without the '✖' button
     fileInput.addEventListener('change', (event) => {
         event.preventDefault();
         handleFiles([...event.target.files]); 
