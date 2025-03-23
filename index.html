@@ -410,6 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle manual file selection
     fileInput.addEventListener('change', (event) => {
         handleFiles(event.target.files);
+        fileInput.value = ''; // Clear the input after selection to allow re-uploading the same file
     });
 
     // Drag and Drop Functionality
@@ -425,8 +426,7 @@ document.addEventListener("DOMContentLoaded", function () {
     uploadArea.addEventListener('drop', (event) => {
         event.preventDefault();
         uploadArea.style.border = '2px dashed #E0E0E0';
-        const files = event.dataTransfer.files;
-        handleFiles(files);
+        handleFiles(event.dataTransfer.files);
     });
 
     // Function to handle file uploads
@@ -435,11 +435,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
+                    // Create a container for the image
                     const imgContainer = document.createElement('div');
                     imgContainer.style.position = 'relative';
                     imgContainer.style.display = 'inline-block';
                     imgContainer.style.margin = '5px';
 
+                    // Image element
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.style.width = '100px';
@@ -482,10 +484,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         imagePreview.removeChild(imgContainer);
                     });
 
+                    // Append everything inside the container
                     imgContainer.appendChild(img);
                     imgContainer.appendChild(removeBtn);
                     imagePreview.appendChild(imgContainer);
                 };
+
+                // Read file as Data URL
                 reader.readAsDataURL(file);
             }
         }
