@@ -425,21 +425,21 @@ footer {
     <a href="#about" onclick="scrollToAbout(event)">About Us</a>
 </div>    
 
-<!-- ✅ Keep only one account button -->
+<!-- ✅ Keep the account button in the navbar -->
 <button id="account-btn" class="account-btn"></button>
 
-<div class="account-container">
-    <div id="account-popup" class="account-popup">
-        <div class="account-header">
-            <div class="profile-pic"></div>
-            <p>User Name</p>
-        </div>
-        <div class="account-body">
-            <button class="account-option">Profile</button>
-            <button class="account-option">Settings</button>
-            <button class="account-option logout">Logout</button>
-        </div>
+<!-- ✅ Move the account popup outside, but keep it hidden by default -->
+<div id="account-popup" class="account-popup">
+    <div class="account-header">
+        <div class="profile-pic"></div>
+        <p>User Name</p>
     </div>
+    <div class="account-body">
+        <button class="account-option">Profile</button>
+        <button class="account-option">Settings</button>
+        <button class="account-option logout">Logout</button>
+    </div>
+</div>
 </div>
 
 
@@ -772,6 +772,27 @@ document.getElementById('download-btn').addEventListener('click', function() {
         pdf.save('converted.pdf');
     } else {
         alert('Please convert images to PDF first.');
+    }
+});
+// Toggle account popup
+document.getElementById('account-btn').addEventListener('click', function(event) {
+    let popup = document.getElementById('account-popup');
+
+    // Position the popup near the button
+    let btnRect = event.target.getBoundingClientRect();
+    popup.style.top = `${btnRect.bottom + window.scrollY}px`;
+    popup.style.left = `${btnRect.left + window.scrollX}px`;
+
+    popup.classList.toggle('show');
+});
+
+// Close popup when clicking outside
+document.addEventListener('click', function(event) {
+    let popup = document.getElementById('account-popup');
+    let button = document.getElementById('account-btn');
+    
+    if (!button.contains(event.target) && !popup.contains(event.target)) {
+        popup.classList.remove('show');
     }
 });
 
