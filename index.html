@@ -704,12 +704,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        let pdf; // Stores the generated PDF
-
+        let pdf; // 🔹 Declare pdf globally
 
 document.getElementById('convert-btn').addEventListener('click', function() {
     const { jsPDF } = window.jspdf;
-    pdf = new jsPDF(); // 🔹 Assign to the global variable
+    pdf = new jsPDF('p', 'pt', 'a4'); // 🔹 A4 Portrait Mode
     const images = document.querySelectorAll('#image-preview img');
 
     if (images.length === 0) {
@@ -728,25 +727,25 @@ document.getElementById('convert-btn').addEventListener('click', function() {
             ctx.drawImage(img, 0, 0);
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            // ✅ Use a fixed page size (like A4)
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const pageHeight = pdf.internal.pageSize.getHeight();
+            // ✅ A4 dimensions in points (1 pt = 1/72 inch)
+            const pageWidth = 595.28; // A4 width in points
+            const pageHeight = 841.89; // A4 height in points
 
-            // ✅ Calculate the new dimensions while maintaining aspect ratio
-            let imgWidth = pageWidth; // Default: Fit width
+            // ✅ Calculate new dimensions while keeping aspect ratio
+            let imgWidth = pageWidth; // Fit width by default
             let imgHeight = (img.naturalHeight / img.naturalWidth) * pageWidth;
 
             if (imgHeight > pageHeight) {
-                imgHeight = pageHeight; // Fit height
+                imgHeight = pageHeight; // Fit height instead
                 imgWidth = (img.naturalWidth / img.naturalHeight) * pageHeight;
             }
 
-            // ✅ Center the image
+            // ✅ Centering the image
             const x = (pageWidth - imgWidth) / 2;
             const y = (pageHeight - imgHeight) / 2;
 
             if (index > 0) {
-                pdf.addPage();
+                pdf.addPage(); // Add new page for each image
             }
 
             pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
