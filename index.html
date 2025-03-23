@@ -499,10 +499,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Prevent duplicate uploads by stopping extra image adding
-    document.querySelector('.btn-primary').onclick = function (event) {
-        event.preventDefault(); // Stop multiple triggers
-        fileInput.click();
     };
 });
 
