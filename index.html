@@ -407,10 +407,13 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    // Prevent double upload when clicking "Upload Images"
+    let uploadedFiles = new Set();
+
     // Handle manual file selection
     fileInput.addEventListener('change', (event) => {
         handleFiles([...event.target.files]); // Convert FileList to Array
-        fileInput.value = ''; // Clear input after selection to allow re-uploading the same file
+        fileInput.value = ''; // Clear input after selection
     });
 
     // Drag and Drop Functionality
@@ -432,17 +435,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to handle file uploads
     function handleFiles(files) {
         files.forEach((file) => {
-            if (file.type.startsWith('image/')) {
-                // Prevent duplicate images
-                const existingImages = Array.from(imagePreview.querySelectorAll('img')).map(img => img.src);
+            if (file.type.startsWith('image/') && !uploadedFiles.has(file.name)) {
+                uploadedFiles.add(file.name); // Prevent duplicate uploads
 
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    if (existingImages.includes(e.target.result)) {
-                        console.warn("Duplicate image detected, skipping...");
-                        return; // Prevent adding duplicate images
-                    }
-
                     const imgContainer = document.createElement('div');
                     imgContainer.style.position = 'relative';
                     imgContainer.style.display = 'inline-block';
@@ -488,6 +485,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     removeBtn.addEventListener('click', () => {
                         imagePreview.removeChild(imgContainer);
+                        uploadedFiles.delete(file.name); // Remove from uploaded set
                     });
 
                     imgContainer.appendChild(img);
