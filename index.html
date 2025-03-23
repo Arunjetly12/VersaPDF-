@@ -435,6 +435,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.style.position = 'relative';
+                    imgContainer.style.display = 'inline-block';
+
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.style.width = '100px';
@@ -442,7 +446,32 @@ document.addEventListener("DOMContentLoaded", function () {
                     img.style.objectFit = 'cover';
                     img.style.borderRadius = '8px';
                     img.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
-                    imagePreview.appendChild(img);
+
+                    // Remove button
+                    const removeBtn = document.createElement('button');
+                    removeBtn.innerHTML = '❌';
+                    removeBtn.style.position = 'absolute';
+                    removeBtn.style.top = '5px';
+                    removeBtn.style.right = '5px';
+                    removeBtn.style.background = 'rgba(255, 0, 0, 0.7)';
+                    removeBtn.style.color = 'white';
+                    removeBtn.style.border = 'none';
+                    removeBtn.style.borderRadius = '50%';
+                    removeBtn.style.width = '20px';
+                    removeBtn.style.height = '20px';
+                    removeBtn.style.cursor = 'pointer';
+                    removeBtn.style.fontSize = '12px';
+                    removeBtn.style.display = 'flex';
+                    removeBtn.style.alignItems = 'center';
+                    removeBtn.style.justifyContent = 'center';
+
+                    removeBtn.addEventListener('click', () => {
+                        imagePreview.removeChild(imgContainer);
+                    });
+
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(removeBtn);
+                    imagePreview.appendChild(imgContainer);
                 };
                 reader.readAsDataURL(file);
             }
