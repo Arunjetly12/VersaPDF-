@@ -695,9 +695,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <!-- 🔹 Bottom Section -->
     <div class="footer-bottom">
+        <button onclick="scrollToAbout()" class="btn btn-secondary">About Us</button>
         <p>© 2025 Versa. All Rights Reserved.</p>
     </div>
-    <button onclick="scrollToAbout()" class="btn btn-secondary">About Us</button>
 </footer>
 
         
@@ -779,9 +779,13 @@ document.addEventListener('click', function(event) {
       
   <script>
     function scrollToAbout() {
-        document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+        const aboutSection = document.getElementById("about");
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: "smooth" });
+        }
     }
 </script>
+
 
 </body>
 </html>
