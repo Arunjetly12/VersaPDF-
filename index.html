@@ -422,7 +422,7 @@ footer {
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="#">Tools</a>
-            <a href="#">About Us</a>
+            <a href="#about">About Us</a>
         </div>    
         <button id="account-btn" class="account-btn"></button>
         
@@ -623,6 +623,9 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
          <!-- 🌟 About Us Section (Placed Above Footer) -->
 <section class="about-us">
+    <!-- 🌟 About Us Section (Add ID for Smooth Scroll) -->
+<section id="about" class="about-us">
+
     <div class="about-container">
         <h2>About Us</h2>
         <p>Welcome to Versa - Your one-stop solution for PDFs. We provide a fast and simple way to convert images to high-quality PDFs.</p>
@@ -694,6 +697,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="footer-bottom">
         <p>© 2025 Versa. All Rights Reserved.</p>
     </div>
+    <button onclick="scrollToAbout()" class="btn btn-secondary">About Us</button>
 </footer>
 
         
@@ -772,9 +776,12 @@ document.addEventListener('click', function(event) {
         popup.classList.remove('show');
     }
 });
-
-    </script>
-    
+      
+  <script>
+    function scrollToAbout() {
+        document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+    }
+</script>
 
 </body>
 </html>
