@@ -407,13 +407,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Prevent double upload when clicking "Upload Images"
+    // Store uploaded files to prevent duplicates
     let uploadedFiles = new Set();
 
-    // Handle manual file selection
+    // Handle file selection when clicking "Upload Images"
     fileInput.addEventListener('change', (event) => {
-        handleFiles([...event.target.files]); // Convert FileList to Array
-        fileInput.value = ''; // Clear input after selection
+        event.preventDefault();
+        handleFiles([...event.target.files]); // Convert FileList to array
+        fileInput.value = ''; // Clear input after selection to allow re-uploading
     });
 
     // Drag and Drop Functionality
@@ -429,10 +430,10 @@ document.addEventListener("DOMContentLoaded", function () {
     uploadArea.addEventListener('drop', (event) => {
         event.preventDefault();
         uploadArea.style.border = '2px dashed #E0E0E0';
-        handleFiles([...event.dataTransfer.files]); // Convert FileList to Array
+        handleFiles([...event.dataTransfer.files]); // Convert FileList to array
     });
 
-    // Function to handle file uploads
+    // Function to handle file uploads (avoiding duplicates)
     function handleFiles(files) {
         files.forEach((file) => {
             if (file.type.startsWith('image/') && !uploadedFiles.has(file.name)) {
@@ -453,7 +454,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     img.style.borderRadius = '8px';
                     img.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
 
-                    // Modern Remove button
+                    // Modern Remove button (styled as a small X)
                     const removeBtn = document.createElement('button');
                     removeBtn.innerHTML = '✖';
                     removeBtn.style.position = 'absolute';
@@ -497,7 +498,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    // Prevent duplicate uploads by stopping extra image adding
+    document.querySelector('.btn-primary').onclick = function (event) {
+        event.preventDefault(); // Stop multiple triggers
+        fileInput.click();
+    };
 });
+
 </script>
 
 
