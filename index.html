@@ -396,53 +396,61 @@ footer {
   </div>
 
   <!-- Your other homepage content goes here -->
-            <script>
-const uploadArea = document.querySelector('.upload-area');
-const fileInput = document.getElementById('file-input');
-const imagePreview = document.getElementById('image-preview');
+          <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const uploadArea = document.querySelector('.upload-area');
+    const fileInput = document.getElementById('file-input');
+    const imagePreview = document.getElementById('image-preview');
 
-// Handle manual file selection
-fileInput.addEventListener('change', (event) => {
-    handleFiles(event.target.files);
-});
+    if (!uploadArea || !fileInput || !imagePreview) {
+        console.error("One or more elements not found!");
+        return;
+    }
 
-// Drag and Drop Functionality
-uploadArea.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    uploadArea.style.border = '2px dashed #b7834c';
-});
+    // Handle manual file selection
+    fileInput.addEventListener('change', (event) => {
+        handleFiles(event.target.files);
+    });
 
-uploadArea.addEventListener('dragleave', () => {
-    uploadArea.style.border = '2px dashed #E0E0E0';
-});
+    // Drag and Drop Functionality
+    uploadArea.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        uploadArea.style.border = '2px dashed #b7834c';
+    });
 
-uploadArea.addEventListener('drop', (event) => {
-    event.preventDefault();
-    uploadArea.style.border = '2px dashed #E0E0E0';
-    const files = event.dataTransfer.files;
-    handleFiles(files);
-});
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.style.border = '2px dashed #E0E0E0';
+    });
 
-// Function to handle file uploads
-function handleFiles(files) {
-    for (const file of files) {
-        if (file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.width = '100px';
-                img.style.height = '100px';
-                img.style.objectFit = 'cover';
-                img.style.borderRadius = '8px';
-                img.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
-                imagePreview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
+    uploadArea.addEventListener('drop', (event) => {
+        event.preventDefault();
+        uploadArea.style.border = '2px dashed #E0E0E0';
+        const files = event.dataTransfer.files;
+        handleFiles(files);
+    });
+
+    // Function to handle file uploads
+    function handleFiles(files) {
+        for (const file of files) {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '100px';
+                    img.style.height = '100px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '8px';
+                    img.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                    imagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
         }
     }
-}
+});
 </script>
+
 
 </body>
 
