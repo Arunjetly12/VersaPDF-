@@ -286,17 +286,18 @@ footer {
 /* Popup container */
 .account-popup {
     position: absolute;
-    top: 50px;
-    right: 0;
+    top: 60px; /* Adjusted for proper positioning */
+    right: 10px;
     background: white;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border-radius: 10px;
-    width: 200px;
+    width: 220px;
     padding: 10px;
     display: none;
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000; /* Ensures it appears above other elements */
 }
 
 /* Show popup */
