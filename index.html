@@ -267,7 +267,7 @@ footer {
         }
         /* Account button container */
 .account-container {
-    position: fixed; /* Keeps it in place */
+    position: relative; /* Keeps it in place */
     top: 10px;
     right: 10px;
 }
@@ -289,7 +289,7 @@ footer {
 .account-popup {
     position: absolute;
     top: 50px;
-    left: 0; /* 🔹 Aligns the popup to the left */
+    right: 0; /* 🔹 Aligns the popup to the left */
     background: white;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border-radius: 10px;
@@ -783,14 +783,13 @@ document.getElementById('download-btn').addEventListener('click', function() {
     }
 });
 // Toggle account popup
-document.getElementById('account-btn').addEventListener('click', function(event) {
+document.getElementById('account-btn').addEventListener('click', function() {
     let popup = document.getElementById('account-popup');
-
-    // Position the popup near the button
-    let btnRect = event.target.getBoundingClientRect();
-    popup.style.top = `${btnRect.bottom + window.scrollY}px`;
-    popup.style.left = `${btnRect.left + window.scrollX}px`;
-
+    
+    // Remove any unwanted styles being added dynamically
+    popup.style.left = ""; 
+    popup.style.right = "0px"; // ✅ Forces it to stay on the left side of the button
+    
     popup.classList.toggle('show');
 });
 
