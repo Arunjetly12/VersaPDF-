@@ -438,6 +438,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const imgContainer = document.createElement('div');
                     imgContainer.style.position = 'relative';
                     imgContainer.style.display = 'inline-block';
+                    imgContainer.style.margin = '5px';
 
                     const img = document.createElement('img');
                     img.src = e.target.result;
@@ -447,23 +448,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     img.style.borderRadius = '8px';
                     img.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
 
-                    // Remove button
+                    // Modern Remove button
                     const removeBtn = document.createElement('button');
-                    removeBtn.innerHTML = '❌';
+                    removeBtn.innerHTML = '✖';
                     removeBtn.style.position = 'absolute';
                     removeBtn.style.top = '5px';
                     removeBtn.style.right = '5px';
-                    removeBtn.style.background = 'rgba(255, 0, 0, 0.7)';
+                    removeBtn.style.background = 'rgba(0, 0, 0, 0.7)';
                     removeBtn.style.color = 'white';
                     removeBtn.style.border = 'none';
                     removeBtn.style.borderRadius = '50%';
-                    removeBtn.style.width = '20px';
-                    removeBtn.style.height = '20px';
+                    removeBtn.style.width = '24px';
+                    removeBtn.style.height = '24px';
                     removeBtn.style.cursor = 'pointer';
-                    removeBtn.style.fontSize = '12px';
+                    removeBtn.style.fontSize = '14px';
                     removeBtn.style.display = 'flex';
                     removeBtn.style.alignItems = 'center';
                     removeBtn.style.justifyContent = 'center';
+                    removeBtn.style.transition = '0.2s ease-in-out';
+                    removeBtn.style.opacity = '0.8';
+
+                    removeBtn.addEventListener('mouseover', () => {
+                        removeBtn.style.opacity = '1';
+                        removeBtn.style.transform = 'scale(1.1)';
+                    });
+
+                    removeBtn.addEventListener('mouseout', () => {
+                        removeBtn.style.opacity = '0.8';
+                        removeBtn.style.transform = 'scale(1)';
+                    });
 
                     removeBtn.addEventListener('click', () => {
                         imagePreview.removeChild(imgContainer);
