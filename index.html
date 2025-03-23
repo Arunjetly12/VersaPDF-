@@ -401,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const uploadArea = document.querySelector('.upload-area');
     const fileInput = document.getElementById('file-input');
     const imagePreview = document.getElementById('image-preview');
-    const uploadBtn = document.getElementById('upload-btn'); // Get the button
+    const uploadBtn = document.getElementById('upload-btn'); 
 
     if (!uploadArea || !fileInput || !imagePreview || !uploadBtn) {
         console.error("One or more elements not found!");
@@ -413,14 +413,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Fix: Ensure button doesn't double-trigger uploads
     uploadBtn.addEventListener('click', function () {
-        fileInput.click(); // Open file selection
+        fileInput.value = ''; // Clear input before opening (fixes duplicate issue)
+        fileInput.click(); 
     });
 
     // Handle file selection when clicking "Upload Images"
     fileInput.addEventListener('change', (event) => {
         event.preventDefault();
-        handleFiles([...event.target.files]); // Convert FileList to array
-        fileInput.value = ''; // Clear input after selection to allow re-uploading
+        handleFiles([...event.target.files]); 
     });
 
     // Drag and Drop Functionality
@@ -436,14 +436,14 @@ document.addEventListener("DOMContentLoaded", function () {
     uploadArea.addEventListener('drop', (event) => {
         event.preventDefault();
         uploadArea.style.border = '2px dashed #E0E0E0';
-        handleFiles([...event.dataTransfer.files]); // Convert FileList to array
+        handleFiles([...event.dataTransfer.files]); 
     });
 
     // Function to handle file uploads (avoiding duplicates)
     function handleFiles(files) {
         files.forEach((file) => {
             if (file.type.startsWith('image/') && !uploadedFiles.has(file.name)) {
-                uploadedFiles.add(file.name); // Prevent duplicate uploads
+                uploadedFiles.add(file.name); 
 
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -460,7 +460,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     img.style.borderRadius = '8px';
                     img.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
 
-                    // Modern Remove button (styled as a small X)
+                    // Modern Remove button
                     const removeBtn = document.createElement('button');
                     removeBtn.innerHTML = '✖';
                     removeBtn.style.position = 'absolute';
@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     removeBtn.addEventListener('click', () => {
                         imagePreview.removeChild(imgContainer);
-                        uploadedFiles.delete(file.name); // Remove from uploaded set
+                        uploadedFiles.delete(file.name); 
                     });
 
                     imgContainer.appendChild(img);
