@@ -421,6 +421,53 @@ footer {
             justify-content: center;
             gap: 15px;
         }
+        .account-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.account-details {
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.account-options {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.account-btn, .logout-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.account-btn {
+    background: blue;
+    color: white;
+    border: none;
+}
+
+.logout-btn {
+    background: red;
+    color: white;
+    border: none;
+}
+
     </style>
 </head>
 <body>
@@ -452,7 +499,31 @@ footer {
     </div>
 </div>
 </div>
-</script>
+        <div class="account-container">
+    <h2>My Account</h2>
+
+    <div class="account-details">
+        <div class="detail-item">
+            <label>Username:</label>
+            <span>Arun Jetly</span>
+        </div>
+        <div class="detail-item">
+            <label>Email:</label>
+            <span>user@example.com</span>
+        </div>
+        <div class="detail-item">
+            <label>Joined:</label>
+            <span>March 2024</span>
+        </div>
+    </div>
+
+    <div class="account-options">
+        <button class="account-btn">Edit Profile</button>
+        <button class="account-btn">Settings</button>
+        <button class="logout-btn">Logout</button>
+    </div>
+</div>
+
       
 </script>
 
