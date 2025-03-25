@@ -169,6 +169,42 @@ html, body {
     color: #555;
     margin-bottom: 30px;
 }
+        @media (max-width: 768px) { 
+    .about-us h2 {
+        font-size: 22px; /* Reduce heading size */
+    }
+
+    .about-us p {
+        font-size: 14px; /* Reduce paragraph size */
+        margin-bottom: 20px; /* Reduce space below */
+    }
+}
+@media (max-width: 768px) { 
+    .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Keep them centered */
+        gap: 10px; /* Reduce spacing */
+    }
+
+    .feature-item {
+        width: 45%; /* Adjust size to keep triangle-like pattern */
+        padding: 15px; /* Reduce padding */
+    }
+
+    .feature-item:nth-child(3) { 
+        width: 100%; /* Make the third item take full width to maintain triangle shape */
+    }
+
+    .feature-item h3 {
+        font-size: 16px; /* Reduce heading size */
+    }
+
+    .feature-item p {
+        font-size: 13px; /* Reduce paragraph size */
+    }
+}
+
 
 .features {
     display: flex;
