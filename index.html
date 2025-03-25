@@ -212,32 +212,23 @@ html, body {
     color: #666;
 }
 @media (max-width: 768px) { 
-    .about-us h2 {
-        font-size: 22px; /* Smaller heading */
-    }
-
-    .about-us p {
-        font-size: 14px; /* Smaller text */
-        margin-bottom: 20px;
-    }
-
     .features {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-        gap: 15px; /* Added more gap to avoid overlap */
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 15px; /* Add spacing to avoid overlap */
         justify-content: center;
-        align-items: center; /* Align items properly */
+        align-items: center;
     }
 
     .feature-item {
-        width: 100%; /* Fit within grid */
-        padding: 12px; /* Reduce padding */
-        min-height: 120px; /* Reduce height to avoid overlap */
+        width: 100%;
+        padding: 15px;
+        min-height: 120px; /* Reduce height slightly */
     }
 
     .feature-item:nth-child(3) { 
         grid-column: span 2; /* Third item takes full width */
-        width: 80%; /* Reduce width slightly to center better */
+        width: 75%; /* Reduce width slightly for better positioning */
         margin: 0 auto; /* Center it */
     }
 
