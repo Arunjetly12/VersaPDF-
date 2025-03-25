@@ -394,8 +394,13 @@ function loadUserProfile() {
 if (window.location.pathname.includes("profile.html")) {
     loadUserProfile();
 }
-        
-document.addEventListener("DOMContentLoaded", function () {
+
+
+// Logout function (optional)
+function logout() {
+    alert("Logged out successfully!");
+    // Add actual logout logic here
+    document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function () {
@@ -405,10 +410,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Logout function (optional)
-function logout() {
-    alert("Logged out successfully!");
-    // Add actual logout logic here
 }
 
 
