@@ -212,13 +212,13 @@ html, body {
     color: #666;
 }
 @media (max-width: 768px) { 
-    .feature-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 120px; /* Set a fixed height for uniformity */
-}
+    .features {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 10px; /* Reduce gap slightly for better spacing */
+        justify-content: center;
+        align-items: center;
+    }
 
 
     .feature-item {
