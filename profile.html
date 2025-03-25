@@ -220,24 +220,27 @@ html, body {
         align-items: center;
     }
 
-
     .feature-item {
         background: white;
         padding: 15px; /* Reduce padding to make the box smaller */
         border-radius: 8px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        width: 160px; /* Reduce width for proper mobile sizing */
+        width: 150px; /* Reduce width slightly */
         text-align: center;
     }
 
     .feature-item:nth-child(3) { 
         grid-column: span 2; /* Third item takes full width */
-        width: 160px; /* SAME width as the other two */
+        width: 150px; /* Keep same width as the others */
         margin: 0 auto; /* Center it */
     }
 
+    .feature-item i {
+        font-size: 20px; /* Reduce icon size */
+    }
+
     .feature-item h3 {
-        font-size: 14px; /* Reduce heading size */
+        font-size: 13px; /* Reduce heading size */
     }
 
     .feature-item p {
@@ -569,60 +572,8 @@ select:hover {
 </div>
 </div>
 
+   
 
-        <!-- 🌟 Footer Section -->
-<footer>
-    <!-- 🔹 Top Section -->
-    <div class="footer-top">
-        <p>Welcome to Versa - Your one-stop solution for PDFs.</p>
-    </div>
-
-    <!-- 🔹 Navigation Section -->
-    <div class="footer-section">
-        <h3>Quick Links</h3>
-        <a href="#about" onclick="scrollToAbout(event)">About Us</a>
-        <a href="#">Contact Us</a>
-        <a href="#">FAQ</a>
-    </div>
-
-    <!-- 🔹 Vertical Divider -->
-    <div class="footer-divider"></div>
-
-    <!-- 🔹 Social Media Section -->
-    <div class="footer-section">
-        <h3>Stay Connected</h3>
-        <div class="social-icons">
-    <a href="#"><img src="https://i.postimg.cc/pXRV1ync/Asset-3.png" alt="Facebook"></a>
-    <a href="#"><img src="https://i.postimg.cc/jqzdXyCJ/Asset-4.png" alt="YouTube"></a>
-    <a href="#"><img src="https://i.postimg.cc/Y0frCBTx/Asset-2.png" alt="Instagram"></a>
-</div>
-
-    </div>
-
-    <!-- 🔹 Vertical Divider -->
-    <div class="footer-divider"></div>
-
-    <!-- 🔹 Contact Section -->
-    <div class="footer-section">
-        <h3>Get in Touch</h3>
-        <p>📍 123 Main St, Anytown, USA</p>
-        <p>📞 +1 555 555 5555</p>
-        <p>✉ info@versa.com</p>
-    </div>
-
-    <!-- 🔹 Vertical Divider -->
-    <div class="footer-divider"></div>
-
-    <!-- 🔹 Bottom Section -->
-    <div class="footer-bottom">
-        <p>© 2025 Versa. All Rights Reserved.</p>
-    </div>
-</footer>
-
-        
-    </div> <!-- ✅ Correctly closing the container -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         let pdf; // 🔹 Declare pdf globally
 
@@ -636,6 +587,54 @@ document.getElementById('convert-btn').addEventListener('click', function() {
         return;
     }
 
+    document.getElementById('loading-spinner').style.display = 'block'; // Show loading
+
+    setTimeout(() => {
+        images.forEach((img, index) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // ✅ Set canvas size same as image
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+
+            // ✅ Fill canvas with white background (fix transparency issue)
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // ✅ Draw the image over the white background
+            ctx.drawImage(img, 0, 0);
+
+            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+            // ✅ A4 dimensions in points (1 pt = 1/72 inch)
+            const pageWidth = 595.28; // A4 width in points
+            const pageHeight = 841.89; // A4 height in points
+
+            // ✅ Calculate new dimensions while keeping aspect ratio
+            let imgWidth = pageWidth; // Fit width by default
+            let imgHeight = (img.naturalHeight / img.naturalWidth) * pageWidth;
+
+            if (imgHeight > pageHeight) {
+                imgHeight = pageHeight; // Fit height instead
+                imgWidth = (img.naturalWidth / img.naturalHeight) * pageHeight;
+            }
+
+            // ✅ Centering the image
+            const x = (pageWidth - imgWidth) / 2;
+            const y = (pageHeight - imgHeight) / 2;
+
+            if (index > 0) {
+                pdf.addPage(); // Add new page for each image
+            }
+
+            pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
+        });
+
+        document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
+        document.getElementById('download-btn').style.display = 'block'; // Show download button
+    }, 2000);
+});
 
 document.getElementById('download-btn').addEventListener('click', function() {
     if (pdf) {
