@@ -178,22 +178,21 @@ html, body {
         font-size: 14px; /* Reduce paragraph size */
         margin-bottom: 20px; /* Reduce space below */
     }
-}
 @media (max-width: 768px) { 
     .features {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center; /* Keep them centered */
-        gap: 10px; /* Reduce spacing */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 10px; /* Adjust spacing */
+        justify-content: center;
     }
 
     .feature-item {
-        width: 45%; /* Adjust size to keep triangle-like pattern */
-        padding: 15px; /* Reduce padding */
+        width: 100%; /* Make sure it fits inside the grid */
+        padding: 15px;
     }
 
     .feature-item:nth-child(3) { 
-        width: 100%; /* Make the third item take full width to maintain triangle shape */
+        grid-column: span 2; /* Make the third item take full width to create a triangle shape */
     }
 
     .feature-item h3 {
