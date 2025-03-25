@@ -182,6 +182,55 @@
   display: inline-block;
   margin-right: 15px;
 }
+        .profile-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #4CAF50;
+}
+
+.profile-details p {
+    font-size: 16px;
+    color: #333;
+    margin: 8px 0;
+}
+
+.logout-btn {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.logout-btn:hover {
+    background: #c9302c;
+}
+
 
 
     </style>
@@ -215,8 +264,23 @@
     </div>
 </div>
 </div>
+        <body>
+    <div class="profile-container">
+        <h2>My Profile</h2>
+        <div class="profile-card">
+            <img src="default-profile.png" alt="Profile Picture" class="profile-pic">
+            <div class="profile-details">
+                <p><strong>Name:</strong> <span id="userName">John Doe</span></p>
+                <p><strong>Email:</strong> <span id="userEmail">user@example.com</span></p>
+                <p><strong>Country:</strong> <span id="userCountry">India</span></p>
+                <p><strong>Joined:</strong> <span id="userJoined">January 2024</span></p>
+            </div>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+</body>
 
-   
+
 
     <script>
         let pdf; // 🔹 Declare pdf globally
@@ -307,6 +371,25 @@ document.addEventListener('click', function(event) {
         popup.classList.remove('show');
     }
 });
+// Function to load user profile details
+function loadUserProfile() {
+    // Replace these values with actual user data from authentication
+    document.getElementById("userName").textContent = "John Doe";  
+    document.getElementById("userEmail").textContent = "user@example.com";  
+    document.getElementById("userCountry").textContent = "India";  
+    document.getElementById("userJoined").textContent = "January 2024";  
+}
+
+// Call the function when the profile page loads
+if (window.location.pathname.includes("profile.html")) {
+    loadUserProfile();
+}
+
+// Logout function (optional)
+function logout() {
+    alert("Logged out successfully!");
+    // Add actual logout logic here
+}
 
 
 </script>
