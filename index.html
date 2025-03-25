@@ -215,35 +215,35 @@ html, body {
     .features {
         display: grid;
         grid-template-columns: 1fr 1fr; /* Two columns */
-        gap: 15px; /* Add spacing to avoid overlap */
+        gap: 10px; /* Reduce gap slightly for better spacing */
         justify-content: center;
         align-items: center;
     }
 
     .feature-item {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 220px;
-    text-align: center;
-}
+        background: white;
+        padding: 15px; /* Reduce padding to make the box smaller */
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        width: 160px; /* Reduce width for proper mobile sizing */
+        text-align: center;
+    }
 
     .feature-item:nth-child(3) { 
         grid-column: span 2; /* Third item takes full width */
-        width: 75%; /* Reduce width slightly for better positioning */
+        width: 160px; /* SAME width as the other two */
         margin: 0 auto; /* Center it */
     }
-}
 
     .feature-item h3 {
-        font-size: 15px; /* Reduce heading size */
+        font-size: 14px; /* Reduce heading size */
     }
 
     .feature-item p {
-        font-size: 12px; /* Reduce text size */
+        font-size: 11px; /* Reduce text size */
     }
 }
+
 
 /* Push footer to the bottom */
 footer {
