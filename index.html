@@ -211,7 +211,6 @@ html, body {
     font-size: 14px;
     color: #666;
 }
-/* Mobile Responsive Fix */
 @media (max-width: 768px) { 
     .about-us h2 {
         font-size: 22px; /* Smaller heading */
@@ -225,25 +224,29 @@ html, body {
     .features {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* Two columns */
-        gap: 10px;
+        gap: 15px; /* Added more gap to avoid overlap */
         justify-content: center;
+        align-items: center; /* Align items properly */
     }
 
     .feature-item {
         width: 100%; /* Fit within grid */
-        padding: 15px;
+        padding: 12px; /* Reduce padding */
+        min-height: 120px; /* Reduce height to avoid overlap */
     }
 
     .feature-item:nth-child(3) { 
-        grid-column: span 2; /* Third item takes full width to maintain triangle layout */
+        grid-column: span 2; /* Third item takes full width */
+        width: 80%; /* Reduce width slightly to center better */
+        margin: 0 auto; /* Center it */
     }
 
     .feature-item h3 {
-        font-size: 16px;
+        font-size: 15px; /* Reduce heading size */
     }
 
     .feature-item p {
-        font-size: 13px;
+        font-size: 12px; /* Reduce text size */
     }
 }
 
