@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMRBMMM46E"></script>
 <script>
@@ -24,6 +26,7 @@
 
   gtag('config', 'G-DMRBMMM46E');
 </script>
+
     <style>
    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
         body {
@@ -144,7 +147,6 @@ html, body {
 }
 
         .about-us {
-    background: #f8f9fa;
     padding: 50px 20px;
     text-align: center;
     border-radius: 12px;
@@ -167,7 +169,17 @@ html, body {
     color: #555;
     margin-bottom: 30px;
 }
+        @media (max-width: 768px) { 
+    .about-us h2 {
+        font-size: 22px; /* Reduce heading size */
+    }
 
+    .about-us p {
+        font-size: 14px; /* Reduce paragraph size */
+        margin-bottom: 20px; /* Reduce space below */
+    }
+ }
+            
 .features {
     display: flex;
     justify-content: center;
@@ -199,6 +211,40 @@ html, body {
     font-size: 14px;
     color: #666;
 }
+@media (max-width: 768px) { 
+    .features {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 10px; /* Reduce gap slightly for better spacing */
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .feature-item {
+        background: white;
+        padding: 15px; /* Reduce padding to make the box smaller */
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        width: 160px; /* Reduce width for proper mobile sizing */
+        text-align: center;
+    }
+
+    .feature-item:nth-child(3) { 
+        grid-column: span 2; /* Third item takes full width */
+        width: 160px; /* SAME width as the other two */
+        margin: 0 auto; /* Center it */
+    }
+
+    .feature-item h3 {
+        font-size: 14px; /* Reduce heading size */
+    }
+
+    .feature-item p {
+        font-size: 11px; /* Reduce text size */
+    }
+}
+
 
 /* Push footer to the bottom */
 footer {
@@ -229,12 +275,17 @@ footer {
 }
 
 .top-image img {
-  max-width: 40%; /* Ensures the image is responsive */
+  max-width: 30%; /* Ensures the image is responsive */
   height: auto; /* Maintains the aspect ratio */
   border-bottom: 2px solid #ddd; /* Optional: Adds a subtle border below the image */
   border-radius: 30px; 
   }
-
+/* Adjust only for mobile */
+@media (max-width: 768px) { 
+    .top-image img {
+        max-width: 80% !important; /* Force bigger size only on mobile */
+    }
+}
 /* Define the fade-in animation */
 @keyframes fadeIn {
   from {
@@ -244,17 +295,27 @@ footer {
     opacity: 1; /* Fade in to fully visible */
   }
 }
+    
 
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            align-items: center;
-            padding: 15px 20px;
-            background: #F8F9FA;
-            border-bottom: 1px solid #E0E0E0;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px; /* Reduce padding on mobile */
+    background: #F8F9FA;
+    border-bottom: 1px solid #E0E0E0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+    box-sizing: border-box; /* Prevents extra width issues */
+}
+@media (max-width: 768px) { 
+    .navbar {
+        padding: 10px; /* Less padding */
+    }
+}
+
         .navbar .logo img {
             height: 40px;
             cursor: pointer;
@@ -394,6 +455,14 @@ footer {
             border: 2px dashed #b7834c;
             box-shadow: 0px 4px 8px rgba(255, 76, 76, 0.2);
         }
+        @media (max-width: 768px) { 
+    .upload-area {
+        width: 90%; /* Make it slightly smaller */
+        min-height: 200px; /* Reduce height */
+        padding: 20px; /* Reduce padding */
+    }
+}
+
         .btn {
             padding: 12px 20px;
             border-radius: 8px;
@@ -429,52 +498,44 @@ footer {
             justify-content: center;
             gap: 15px;
         }
-        .account-container {
-    margin-top: 20px;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        .option-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 15px;
 }
 
-.account-details {
-    margin-top: 10px;
-    padding: 10px;
-    border-top: 1px solid #ddd;
+select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
+.coming-soon-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: white;
+  color: red;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: bold;
+  border: 1px solid red;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.account-options {
-    margin-top: 15px;
-    text-align: center;
+select:hover {
+  opacity: 1;
+}
+        html, body {
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    max-width: 100%;
 }
 
-.account-btn, .logout-btn {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.account-btn {
-    background: blue;
-    color: white;
-    border: none;
-}
-
-.logout-btn {
-    background: red;
-    color: white;
-    border: none;
-}
 
     </style>
 </head>
@@ -489,11 +550,122 @@ footer {
     <a href="/">Home</a>
     <a href="#">Tools</a>
     <a href="#about" onclick="scrollToAbout(event)">About Us</a>
-</div>   
-</div> 
+</div>    
 
-</script>
-      
+<!-- ✅ Keep the account button in the navbar -->
+<button id="account-btn" class="account-btn"></button>
+
+<!-- ✅ Move the account popup outside, but keep it hidden by default -->
+<div id="account-popup" class="account-popup">
+    <div class="account-header">
+        <div class="profile-pic"></div>
+        <p>User Name</p>
+    </div>
+    <div class="account-body">
+        <button class="account-option" onclick="window.location.href='profile.html'">Profile</button>
+        <button class="account-option">Settings</button>
+        <button class="account-option logout">Logout</button>
+    </div>
+</div>
+</div>
+
+
+        <!-- 🌟 Footer Section -->
+<footer>
+    <!-- 🔹 Top Section -->
+    <div class="footer-top">
+        <p>Welcome to Versa - Your one-stop solution for PDFs.</p>
+    </div>
+
+    <!-- 🔹 Navigation Section -->
+    <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#about" onclick="scrollToAbout(event)">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQ</a>
+    </div>
+
+    <!-- 🔹 Vertical Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- 🔹 Social Media Section -->
+    <div class="footer-section">
+        <h3>Stay Connected</h3>
+        <div class="social-icons">
+    <a href="#"><img src="https://i.postimg.cc/pXRV1ync/Asset-3.png" alt="Facebook"></a>
+    <a href="#"><img src="https://i.postimg.cc/jqzdXyCJ/Asset-4.png" alt="YouTube"></a>
+    <a href="#"><img src="https://i.postimg.cc/Y0frCBTx/Asset-2.png" alt="Instagram"></a>
+</div>
+
+    </div>
+
+    <!-- 🔹 Vertical Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- 🔹 Contact Section -->
+    <div class="footer-section">
+        <h3>Get in Touch</h3>
+        <p>📍 123 Main St, Anytown, USA</p>
+        <p>📞 +1 555 555 5555</p>
+        <p>✉ info@versa.com</p>
+    </div>
+
+    <!-- 🔹 Vertical Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- 🔹 Bottom Section -->
+    <div class="footer-bottom">
+        <p>© 2025 Versa. All Rights Reserved.</p>
+    </div>
+</footer>
+
+        
+    </div> <!-- ✅ Correctly closing the container -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        let pdf; // 🔹 Declare pdf globally
+
+document.getElementById('convert-btn').addEventListener('click', function() {
+    const { jsPDF } = window.jspdf;
+    pdf = new jsPDF('p', 'pt', 'a4'); // 🔹 A4 Portrait Mode
+    const images = document.querySelectorAll('#image-preview img');
+
+    if (images.length === 0) {
+        alert('Please upload at least one image.');
+        return;
+    }
+
+
+document.getElementById('download-btn').addEventListener('click', function() {
+    if (pdf) {
+        pdf.save('converted.pdf');
+    } else {
+        alert('Please convert images to PDF first.');
+    }
+});
+// Toggle account popup
+document.getElementById('account-btn').addEventListener('click', function() {
+    let popup = document.getElementById('account-popup');
+    
+    // Remove any unwanted styles being added dynamically
+    popup.style.left = ""; 
+    popup.style.right = "0px"; // ✅ Forces it to stay on the left side of the button
+    
+    popup.classList.toggle('show');
+});
+
+// Close popup when clicking outside
+document.addEventListener('click', function(event) {
+    let popup = document.getElementById('account-popup');
+    let button = document.getElementById('account-btn');
+    
+    if (!button.contains(event.target) && !popup.contains(event.target)) {
+        popup.classList.remove('show');
+    }
+});
+
+
 </script>
 
 
