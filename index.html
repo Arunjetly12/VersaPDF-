@@ -178,33 +178,7 @@ html, body {
         font-size: 14px; /* Reduce paragraph size */
         margin-bottom: 20px; /* Reduce space below */
     }
-@media (max-width: 768px) { 
-    .features {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-        gap: 10px; /* Adjust spacing */
-        justify-content: center;
-    }
-
-    .feature-item {
-        width: 100%; /* Make sure it fits inside the grid */
-        padding: 15px;
-    }
-
-    .feature-item:nth-child(3) { 
-        grid-column: span 2; /* Make the third item take full width to create a triangle shape */
-    }
-
-    .feature-item h3 {
-        font-size: 16px; /* Reduce heading size */
-    }
-
-    .feature-item p {
-        font-size: 13px; /* Reduce paragraph size */
-    }
-}
-
-
+            
 .features {
     display: flex;
     justify-content: center;
@@ -236,6 +210,42 @@ html, body {
     font-size: 14px;
     color: #666;
 }
+            /* Mobile Responsive Fix */
+@media (max-width: 768px) { 
+    .about-us h2 {
+        font-size: 22px; /* Smaller heading */
+    }
+
+    .about-us p {
+        font-size: 14px; /* Smaller text */
+        margin-bottom: 20px;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .feature-item {
+        width: 100%; /* Fit within grid */
+        padding: 15px;
+    }
+
+    .feature-item:nth-child(3) { 
+        grid-column: span 2; /* Third item takes full width to maintain triangle layout */
+    }
+
+    .feature-item h3 {
+        font-size: 16px;
+    }
+
+    .feature-item p {
+        font-size: 13px;
+    }
+}
+
 
 /* Push footer to the bottom */
 footer {
