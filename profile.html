@@ -305,62 +305,7 @@ document.getElementById('convert-btn').addEventListener('click', function() {
         return;
     }
 
-    document.getElementById('loading-spinner').style.display = 'block'; // Show loading
 
-    setTimeout(() => {
-        images.forEach((img, index) => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            // ✅ Set canvas size same as image
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-
-            // ✅ Fill canvas with white background (fix transparency issue)
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // ✅ Draw the image over the white background
-            ctx.drawImage(img, 0, 0);
-
-            const imgData = canvas.toDataURL('image/jpeg', 1.0);
-
-            // ✅ A4 dimensions in points (1 pt = 1/72 inch)
-            const pageWidth = 595.28; // A4 width in points
-            const pageHeight = 841.89; // A4 height in points
-
-            // ✅ Calculate new dimensions while keeping aspect ratio
-            let imgWidth = pageWidth; // Fit width by default
-            let imgHeight = (img.naturalHeight / img.naturalWidth) * pageWidth;
-
-            if (imgHeight > pageHeight) {
-                imgHeight = pageHeight; // Fit height instead
-                imgWidth = (img.naturalWidth / img.naturalHeight) * pageHeight;
-            }
-
-            // ✅ Centering the image
-            const x = (pageWidth - imgWidth) / 2;
-            const y = (pageHeight - imgHeight) / 2;
-
-            if (index > 0) {
-                pdf.addPage(); // Add new page for each image
-            }
-
-            pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
-        });
-
-        document.getElementById('loading-spinner').style.display = 'none'; // Hide loading
-        document.getElementById('download-btn').style.display = 'block'; // Show download button
-    }, 2000);
-});
-
-document.getElementById('download-btn').addEventListener('click', function() {
-    if (pdf) {
-        pdf.save('converted.pdf');
-    } else {
-        alert('Please convert images to PDF first.');
-    }
-});
 // Toggle account popup
 document.getElementById('account-btn').addEventListener('click', function() {
     let popup = document.getElementById('account-popup');
@@ -400,7 +345,8 @@ if (window.location.pathname.includes("profile.html")) {
 function logout() {
     alert("Logged out successfully!");
     // Add actual logout logic here
-    document.addEventListener("DOMContentLoaded", function () {
+}
+document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function () {
@@ -409,8 +355,6 @@ function logout() {
         });
     }
 });
-
-}
 
 
 </script>
