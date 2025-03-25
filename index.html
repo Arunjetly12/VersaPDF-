@@ -211,7 +211,41 @@ html, body {
     font-size: 14px;
     color: #666;
 }
+/* Mobile Responsive Fix */
+@media (max-width: 768px) { 
+    .about-us h2 {
+        font-size: 22px; /* Smaller heading */
+    }
 
+    .about-us p {
+        font-size: 14px; /* Smaller text */
+        margin-bottom: 20px;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .feature-item {
+        width: 100%; /* Fit within grid */
+        padding: 15px;
+    }
+
+    .feature-item:nth-child(3) { 
+        grid-column: span 2; /* Third item takes full width to maintain triangle layout */
+    }
+
+    .feature-item h3 {
+        font-size: 16px;
+    }
+
+    .feature-item p {
+        font-size: 13px;
+    }
+}
 
 /* Push footer to the bottom */
 footer {
