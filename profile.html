@@ -235,18 +235,6 @@
     </style>
 </head>
 <body>
-    <div class="profile-container">
-    <h2>Profile</h2>
-    <div class="profile-card">
-        <img src="default-profile.png" alt="Profile Picture" class="profile-pic">
-        <h3 id="userName">Loading...</h3>
-        <p>Email: <span id="userEmail">Loading...</span></p>
-        <p>Country: <span id="userCountry">Loading...</span></p>
-        <p>Joined: <span id="userJoined">Loading...</span></p>
-        <button onclick="logout()">Logout</button>
-    </div>
-</div>
-
     <nav class="navbar">
         <div class="logo">
             <a href="/">
@@ -275,7 +263,21 @@
     </div>
 </div>
 </div>
-        
+         </style>
+</head>
+<body>
+   <div class="profile-container">
+    <h2>Profile</h2>
+    <div class="profile-card">
+        <img src="default-profile.png" alt="Profile Picture" class="profile-pic">
+        <h3 id="userName">Loading...</h3>
+        <p>Email: <span id="userEmail">Loading...</span></p>
+        <p>Country: <span id="userCountry">Loading...</span></p>
+        <p>Joined: <span id="userJoined">Loading...</span></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+</div>
+
 
     <script>
         let pdf; // 🔹 Declare pdf globally
