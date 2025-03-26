@@ -107,12 +107,18 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // Google Login
     document.getElementById("google-login").addEventListener("click", async function() {
-        const { error } = await supabase.auth.signInWithOAuth({ provider: "google" });
-
-        if (error) {
-            alert("Google Login failed: " + error.message);
+    let { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+            redirectTo: "https://your-vercel-project.vercel.app/index.html"  // Replace with your real domain
         }
     });
+
+    if (error) {
+        alert("Google Login failed: " + error.message);
+    }
+});
+
 
     </script>
 
