@@ -86,7 +86,7 @@ const { createClient } = window.supabase;
 const SUPABASE_URL = "https://etrxonsxtjqrwizffstu.supabase.co";  // Replace with your Supabase URL
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0cnhvbnN4dGpxcndpemZmc3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5OTEyMDQsImV4cCI6MjA1ODU2NzIwNH0.teZ_HhEklSDkZSkWbGy5aElv7AZ3kc39_eVTRpkokaQ";  // Replace with your actual anon key
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Email & Password Login
 document.getElementById('login-form').addEventListener('submit', async (e) => {
@@ -101,18 +101,24 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         document.getElementById('message').innerText = error.message;
     } else {
         document.getElementById('message').innerText = "Login successful!";
-        window.location.href = "dashboard.html";  // Redirect after login
+        window.location.href = "index.html";  // Change this to your homepage file
     }
 });
 
 // Google Login
 document.getElementById("google-login").addEventListener("click", async function() {
-    const { error } = await supabase.auth.signInWithOAuth({ provider: "google" });
+    let { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+            redirectTo: "https://versa-pdf.vercel.app//index.html"  // Replace with your homepage URL
+        }
+    });
 
     if (error) {
         alert("Google Login failed: " + error.message);
     }
 });
+
 
     </script>
 
