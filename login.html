@@ -110,7 +110,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     let { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: "https://your-vercel-project.vercel.app/index.html"  // Replace with your real domain
+            redirectTo: "https://versa-pdf.vercel.app//index.html"  // Replace with your real domain
         }
     });
 
