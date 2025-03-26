@@ -277,6 +277,46 @@
 </nav>   
          
 </head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  // Initialize Supabase
+  const supabaseUrl = "YOUR_SUPABASE_URL";
+  const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function loadUserProfile() {
+      const { data: userData, error: authError } = await supabase.auth.getUser();
+
+      if (authError || !userData.user) {
+          console.error("Error fetching user:", authError?.message);
+          return;
+      }
+
+      const userId = userData.user.id;
+
+      // Fetch user details from the database
+      const { data: user, error: dbError } = await supabase
+          .from("Users")
+          .select("name, email, country, joined")
+          .eq("id", userId)
+          .single();
+
+      if (dbError) {
+          console.error("Error fetching user data:", dbError.message);
+          return;
+      }
+
+      // Display user details in profile
+      document.getElementById("userName").textContent = user.name;
+      document.getElementById("userEmail").textContent = user.email;
+      document.getElementById("userCountry").textContent = user.country;
+      document.getElementById("userJoined").textContent = new Date(user.joined).toDateString();
+  }
+
+  // Call the function when the page loads
+  document.addEventListener("DOMContentLoaded", loadUserProfile);
+</script>
+
 <body>
    <!-- ✅ Profile Page Content -->
 <div class="profile-container">
@@ -355,6 +395,7 @@ function logout() {
     alert("Logged out successfully!");
     // Add actual logout logic here
 }
+    
 
 
 
