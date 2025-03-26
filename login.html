@@ -103,14 +103,14 @@
             }
         });
 
-        // Google Login
-        document.getElementById('google-login').addEventListener('click', async () => {
-            const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+        document.getElementById("google-login").addEventListener("click", async function() {
+    let { user, error } = await supabase.auth.signInWithOAuth({ provider: "google" });
 
-            if (error) {
-                document.getElementById('message').innerText = error.message;
-            }
-        });
+    if (error) {
+        alert("Google Login failed: " + error.message);
+    }
+});
+
     </script>
 
 </body>
