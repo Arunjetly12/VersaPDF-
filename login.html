@@ -80,15 +80,11 @@
     </div>
 
     <script>
-        // Supabase setup
-        const SUPABASE_URL = "https://etrxonsxtjqrwizffstu.supabase.co"; 
-        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0cnhvbnN4dGpxcndpemZmc3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5OTEyMDQsImV4cCI6MjA1ODU2NzIwNH0.teZ_HhEklSDkZSkWbGy5aElv7AZ3kc39_eVTRpkokaQ";  // Replace this with your actual new Anon Key
-
-      // Initialize Supabase
+        // Initialize Supabase
 const { createClient } = supabase;
 
 const SUPABASE_URL = "https://etrxonsxtjqrwizffstu.supabase.co";  // Replace with your Supabase URL
-const SUPABASE_ANON_KEY = "your-anon-key";  // Replace with your actual anon key
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0cnhvbnN4dGpxcndpemZmc3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5OTEyMDQsImV4cCI6MjA1ODU2NzIwNH0.teZ_HhEklSDkZSkWbGy5aElv7AZ3kc39_eVTRpkokaQ";  // Replace with your actual anon key
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -117,7 +113,6 @@ document.getElementById("google-login").addEventListener("click", async function
         alert("Google Login failed: " + error.message);
     }
 });
-
 
     </script>
 
