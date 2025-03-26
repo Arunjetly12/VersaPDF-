@@ -134,6 +134,9 @@ supabase.auth.onAuthStateChange(async (event, session) => {
             // Update the UI with user info (name and profile picture)
             document.getElementById('user-name').innerText = userData.name;
             document.getElementById('user-image').src = userData.profile_picture || 'https://i.postimg.cc/VvwnKx7X/profile-8861091.png'; 
+            // Show the profile image and hide the account name
+            document.getElementById('user-image').style.display = 'block';
+            document.getElementById('user-name').style.display = 'none';
  // Set a default if not available
         }
     }
