@@ -569,8 +569,12 @@ select:hover {
 </div>    
 
 <!-- ✅ Keep the account button in the navbar -->
-<button id="account-btn" class="account-btn"></button>
-        <img id="user-image" class="account-img" src="" alt="User Profile Image" />
+<!-- Account Button -->
+<button id="account-btn" class="account-btn">
+    <span id="user-name">Account</span>
+    <img id="user-image" class="account-img" src="" alt="User Profile Image" style="display: none;" />
+</button>
+
 
 <!-- ✅ Move the account popup outside, but keep it hidden by default -->
 <div id="account-popup" class="account-popup">
