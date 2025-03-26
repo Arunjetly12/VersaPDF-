@@ -133,7 +133,8 @@ supabase.auth.onAuthStateChange(async (event, session) => {
         } else {
             // Update the UI with user info (name and profile picture)
             document.getElementById('user-name').innerText = userData.name;
-            document.getElementById('user-image').src = userData.profile_picture || 'default-image-url';  // Set a default if not available
+            document.getElementById('user-image').src = userData.profile_picture || 'https://i.postimg.cc/VvwnKx7X/profile-8861091.png'; 
+ // Set a default if not available
         }
     }
 });
