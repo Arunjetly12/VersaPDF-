@@ -370,22 +370,7 @@ function logout() {
     // Add actual logout logic here
 }
 <script>
-        const supabaseUrl = "https://afwueyegesbzdgfpoiha.supabase.co";
-        const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        async function loadUserProfile() {
-            const { data: user, error } = await supabase.auth.getUser();
-            if (error || !user) {
-                alert("You are not logged in!");
-                window.location.href = "login.html"; // Redirect to login
-            } else {
-                document.getElementById("userName").textContent = user.user_metadata.name;
-                document.getElementById("userEmail").textContent = user.email;
-                document.getElementById("userJoined").textContent = user.created_at;
-            }
-        }
-
+        
         async function logout() {
             await supabase.auth.signOut();
             alert("Logged out successfully!");
