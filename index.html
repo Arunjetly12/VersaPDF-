@@ -969,9 +969,10 @@ document.getElementById("login-btn").addEventListener("click", function() {
     window.location.href = "login.html";
 });
 // Initialize Supabase
+// Initialize Supabase
 const supabase = supabase.createClient(
-    "https://your-project-url.supabase.co",  // Replace with your Supabase Project URL
-    "your-anon-key"  // Replace with your Supabase Anon Key
+    "https://etrxonsxtjqrwizffstu.supabase.co",  // Replace with your Supabase Project URL
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0cnhvbnN4dGpxcndpemZmc3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5OTEyMDQsImV4cCI6MjA1ODU2NzIwNH0.teZ_HhEklSDkZSkWbGy5aElv7AZ3kc39_eVTRpkokaQ"  // Replace with your Supabase Anon Key
 );
 
 // Logout function
@@ -986,7 +987,6 @@ async function logoutUser() {
 
 // Select logout button using class and add event listener
 document.querySelector(".logout").addEventListener("click", logoutUser);
-
 </script>
 
 
