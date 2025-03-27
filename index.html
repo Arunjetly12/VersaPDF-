@@ -968,7 +968,24 @@ document.addEventListener('click', function(event) {
 document.getElementById("login-btn").addEventListener("click", function() {
     window.location.href = "login.html";
 });
+// Initialize Supabase
+const supabase = supabase.createClient(
+    "https://your-project-url.supabase.co",  // Replace with your Supabase Project URL
+    "your-anon-key"  // Replace with your Supabase Anon Key
+);
 
+// Logout function
+async function logoutUser() {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+        console.error("Logout failed:", error.message);
+    } else {
+        window.location.href = "index.html"; // Redirect to homepage after logout
+    }
+}
+
+// Select logout button using class and add event listener
+document.querySelector(".logout").addEventListener("click", logoutUser);
 
 </script>
 
