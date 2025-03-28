@@ -941,7 +941,18 @@ document.getElementById('download-btn').addEventListener('click', function() {
         alert('Please convert images to PDF first.');
     }
 });
-// Toggle account popup
+// ✅ Toggle account popup
+document.getElementById('account-btn').addEventListener('click', function(event) {
+    let popup = document.getElementById('account-popup');
+    
+    // Prevent default closing when clicking the button
+    event.stopPropagation();
+
+    // ✅ Toggle visibility
+    popup.classList.toggle('show');
+});
+
+// ✅ Close popup when clicking outside
 document.addEventListener('click', function(event) {
     let popup = document.getElementById('account-popup');
     let button = document.getElementById('account-btn');
@@ -950,6 +961,7 @@ document.addEventListener('click', function(event) {
         popup.classList.remove('show');
     }
 });
+
 
 document.getElementById("login-btn").addEventListener("click", function() {
     window.location.href = "login.html";
