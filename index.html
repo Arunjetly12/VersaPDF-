@@ -980,18 +980,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         const userImage = user.user_metadata?.avatar_url || "https://i.postimg.cc/VvwnKx7X/profile-8861091.png";
 
         // ✅ Update account button (navbar)
-        const accountBtnName = document.getElementById("account-btn-name");
-        const accountBtnImg = document.getElementById("account-btn-img");
-
-        if (accountBtnName) accountBtnName.innerText = userName;
-        if (accountBtnImg) {
-            accountBtnImg.src = userImage;
-            accountBtnImg.style.display = "block"; // Show user image after login
-        }
+        document.getElementById("user-name").innerText = userName;  // Update name
+        const accountBtnImg = document.getElementById("user-image");
+        accountBtnImg.src = userImage;
+        accountBtnImg.style.display = "block"; // Show image instead of default text
 
         // ✅ Update popup profile section
         document.getElementById("popup-user-name").innerText = userName;
         document.getElementById("popup-user-image").src = userImage;
+    }
+});
 
         // ✅ Show logout button & hide login button after login
         document.getElementById("login-btn").style.display = "none";
