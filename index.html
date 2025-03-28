@@ -571,32 +571,28 @@ select:hover {
 
 <!-- ✅ Keep the account button in the navbar -->
 <!-- Account Button -->
+<!-- ✅ Account Button in Navbar -->
 <button id="account-btn" class="account-btn">
-    <span id="user-name">Account</span>
-    <img id="user-image" class="account-img" src="" alt="User Profile Image" style="display: none;" />
+    <span id="account-btn-name">Account</span>
+    <img id="account-btn-img" class="account-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile Image" style="display: none;" />
 </button>
 
-
-<!-- ✅ Move the account popup outside, but keep it hidden by default -->
+<!-- ✅ Account Popup -->
 <div id="account-popup" class="account-popup">
     <div class="account-header">
-       <div class="profile-pic"></div>
-        <p>User Name</p>
+       <div class="profile-pic">
+           <img id="popup-user-image" class="profile-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile" />
+       </div>
+       <p id="popup-user-name">User Name</p>
     </div>
-    <div class="account-info">
-    <img id="user-image" src="default-image-url" alt="User Profile" class="profile-img" />
-    <h2 id="user-name">User Name</h2>
-</div>
-
+    
     <div class="account-body">
         <button class="account-option" onclick="window.location.href='profile.html'">Profile</button>
         <button class="account-option">Settings</button>
         <button id="login-btn" class="account-option login">Login</button>
-        <button class="account-option logout">Logout</button>
+        <button id="logout-btn" class="account-option logout">Logout</button>
     </div>
 </div>
-</div>
-
 
     </nav>
     <div class="container">
