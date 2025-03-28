@@ -988,8 +988,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // ✅ Update popup profile section
         document.getElementById("popup-user-name").innerText = userName;
         document.getElementById("popup-user-image").src = userImage;
-    }
-});
 
         // ✅ Show logout button & hide login button after login
         document.getElementById("login-btn").style.display = "none";
@@ -999,12 +997,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("login-btn").style.display = "block";
         document.getElementById("logout-btn").style.display = "none";
     }
-});
 
-// ✅ Logout functionality
-document.getElementById("logout-btn").addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    window.location.reload(); // Refresh the page after logout
+    // ✅ Logout functionality (kept inside DOMContentLoaded to avoid errors)
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+        await supabase.auth.signOut();
+        window.location.reload(); // Refresh the page after logout
+    });
 });
 
 
