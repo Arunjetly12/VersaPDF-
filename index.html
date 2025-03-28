@@ -964,29 +964,7 @@ document.addEventListener('click', function(event) {
 document.getElementById("login-btn").addEventListener("click", function() {
     window.location.href = "login.html";
 });
-document.addEventListener("DOMContentLoaded", async () => {
-    if (typeof supabase === "undefined") {
-        console.error("Supabase is not initialized properly!");
-        return;
-    }
 
-    const { data: { user } } = await supabase.auth.getUser();
-
-    if (user) {
-        const userName = user.user_metadata?.full_name || "User";
-        const userImage = user.user_metadata?.avatar_url || "https://i.postimg.cc/VvwnKx7X/profile-8861091.png";
-
-        // ✅ Update account button (navbar)
-        document.getElementById("account-btn-name").innerText = userName;
-        const accountBtnImg = document.getElementById("account-btn-img");
-        accountBtnImg.src = userImage;
-        accountBtnImg.style.display = "block"; // Show user image after login
-
-        // ✅ Update popup profile section
-        document.getElementById("popup-user-name").innerText = userName;
-        document.getElementById("popup-user-image").src = userImage;
-    }
-});
 
 </script>
 
