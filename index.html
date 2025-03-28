@@ -573,16 +573,20 @@ select:hover {
 <!-- Account Button -->
 <!-- ✅ Account Button in Navbar -->
 <button id="account-btn" class="account-btn">
-    <span id="account-name">Account</span>
-    <img id="account-img" class="account-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile Image" />
+    <span id="account-btn-name">Account</span> 
+    <img id="account-btn-img" class="account-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile Image" style="display: none;" />
 </button>
 
 <!-- ✅ Account Popup -->
 <div id="account-popup" class="account-popup">
     <div class="account-header">
-        <img id="popup-user-image" class="profile-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile Image" />
-        <h2 id="popup-user-name">User Name</h2>
+        <div class="profile-pic">
+            <img id="popup-user-image" class="profile-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile" />
+        </div>
+        <p id="popup-user-name">User Name</p>
     </div>
+</div>
+
     <div class="account-body">
         <button class="account-option" onclick="window.location.href='profile.html'">Profile</button>
         <button class="account-option">Settings</button>
@@ -970,14 +974,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const { data: { user } } = await supabase.auth.getUser();
-    
+
     if (user) {
         const userName = user.user_metadata?.full_name || "User";
         const userImage = user.user_metadata?.avatar_url || "https://i.postimg.cc/VvwnKx7X/profile-8861091.png";
 
-        document.getElementById("account-name").innerText = userName;
-        document.getElementById("account-img").src = userImage;
+        // ✅ Update account button (navbar)
+        document.getElementById("account-btn-name").innerText = userName;
+        const accountBtnImg = document.getElementById("account-btn-img");
+        accountBtnImg.src = userImage;
+        accountBtnImg.style.display = "block"; // Show user image after login
 
+        // ✅ Update popup profile section
         document.getElementById("popup-user-name").innerText = userName;
         document.getElementById("popup-user-image").src = userImage;
     }
