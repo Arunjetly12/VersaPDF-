@@ -979,15 +979,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         const userName = user.user_metadata?.full_name || "User";
         const userImage = user.user_metadata?.avatar_url || "https://i.postimg.cc/VvwnKx7X/profile-8861091.png";
 
+        console.log("User Data:", user); // ✅ Debugging log to check user data
+
         // ✅ Update account button (navbar)
-        document.getElementById("user-name").innerText = userName;  // Update name
-        const accountBtnImg = document.getElementById("user-image");
-        accountBtnImg.src = userImage;
-        accountBtnImg.style.display = "block"; // Show image instead of default text
+        const accountBtnName = document.getElementById("account-btn-name");
+        const accountBtnImg = document.getElementById("account-btn-img");
+
+        if (accountBtnName) accountBtnName.innerText = userName;  // Update text
+        if (accountBtnImg) {
+            accountBtnImg.src = userImage;
+            accountBtnImg.style.display = "block"; // Show image
+        }
 
         // ✅ Update popup profile section
-        document.getElementById("popup-user-name").innerText = userName;
-        document.getElementById("popup-user-image").src = userImage;
+        const popupUserName = document.getElementById("popup-user-name");
+        const popupUserImage = document.getElementById("popup-user-image");
+
+        if (popupUserName) popupUserName.innerText = userName;
+        if (popupUserImage) popupUserImage.src = userImage;
 
         // ✅ Show logout button & hide login button after login
         document.getElementById("login-btn").style.display = "none";
@@ -998,12 +1007,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("logout-btn").style.display = "none";
     }
 
-    // ✅ Logout functionality (kept inside DOMContentLoaded to avoid errors)
+    // ✅ Logout functionality
     document.getElementById("logout-btn").addEventListener("click", async () => {
         await supabase.auth.signOut();
         window.location.reload(); // Refresh the page after logout
     });
 });
+
 
 
 </script>
