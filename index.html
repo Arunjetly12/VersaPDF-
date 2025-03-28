@@ -571,28 +571,23 @@ select:hover {
 
 <!-- ✅ Keep the account button in the navbar -->
 <!-- Account Button -->
+<!-- ✅ Account Button in Navbar -->
 <button id="account-btn" class="account-btn">
-    <span id="user-name">Account</span>
-    <img id="user-image" class="account-img" src="" alt="User Profile Image" style="display: none;" />
+    <span id="account-name">Account</span>
+    <img id="account-img" class="account-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile Image" />
 </button>
 
-
-<!-- ✅ Move the account popup outside, but keep it hidden by default -->
+<!-- ✅ Account Popup -->
 <div id="account-popup" class="account-popup">
     <div class="account-header">
-       <div class="profile-pic"></div>
-        <p>User Name</p>
+        <img id="popup-user-image" class="profile-img" src="https://i.postimg.cc/VvwnKx7X/profile-8861091.png" alt="User Profile Image" />
+        <h2 id="popup-user-name">User Name</h2>
     </div>
-    <div class="account-info">
-    <img id="user-image" src="default-image-url" alt="User Profile" class="profile-img" />
-    <h2 id="user-name">User Name</h2>
-</div>
-
     <div class="account-body">
         <button class="account-option" onclick="window.location.href='profile.html'">Profile</button>
         <button class="account-option">Settings</button>
         <button id="login-btn" class="account-option login">Login</button>
-        <button class="account-option logout">Logout</button>
+        <button id="logout-btn" class="account-option logout">Logout</button>
     </div>
 </div>
 </div>
@@ -967,6 +962,22 @@ document.addEventListener('click', function(event) {
 });
 document.getElementById("login-btn").addEventListener("click", function() {
     window.location.href = "login.html";
+});
+document.addEventListener("DOMContentLoaded", async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (user) {
+        const userName = user.user_metadata?.full_name || "User";
+        const userImage = user.user_metadata?.avatar_url || "https://i.postimg.cc/VvwnKx7X/profile-8861091.png";
+
+        // ✅ Update Navbar Button
+        document.getElementById("account-name").innerText = userName;
+        document.getElementById("account-img").src = userImage;
+
+        // ✅ Update Popup Profile
+        document.getElementById("popup-user-name").innerText = userName;
+        document.getElementById("popup-user-image").src = userImage;
+    }
 });
 
 </script>
