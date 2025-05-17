@@ -3,148 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .login-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 300px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .google-btn {
-            background-color: #db4437;
-        }
-
-        .google-btn:hover {
-            background-color: #b03524;
-        }
-
-        #message {
-            margin-top: 10px;
-            color: red;
-        }
-    </style>
+    <title>Login | VersaPDF</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="login-form">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
-            <button type="submit">Login</button>
-        </form>
-        <button id="google-login" class="google-btn">Login with Google</button>
-        <p id="message"></p>
+    <div class="auth-container">
+        <div class="auth-form-card">
+            <h2 class="auth-title">Login</h2>
+            <form>
+                <label>Email</label>
+                <input type="email" placeholder="Enter your email" required class="auth-input">
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password" required class="auth-input">
+                <button type="submit" class="btn btn-primary auth-btn">Login</button>
+            </form>
+            <p class="auth-link">
+                Don't have an account? <a href="signup.html">Sign up</a>
+            </p>
+        </div>
     </div>
-
-    <script>
-        // Initialize Supabase
-const { createClient } = window.supabase;
-
-const SUPABASE_URL = "https://etrxonsxtjqrwizffstu.supabase.co";  // Replace with your Supabase URL
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0cnhvbnN4dGpxcndpemZmc3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5OTEyMDQsImV4cCI6MjA1ODU2NzIwNH0.teZ_HhEklSDkZSkWbGy5aElv7AZ3kc39_eVTRpkokaQ";  // Replace with your actual anon key
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Email & Password Login
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-        if (error) {
-            document.getElementById('message').innerText = error.message;
-        } else {
-            document.getElementById('message').innerText = "Login successful!";
-            window.location.href = "index.html";  // Redirect after login
-        }
-    });
-
-    // Google Login
-    document.getElementById("google-login").addEventListener("click", async function() {
-    let { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: "https://versa-pdf.vercel.app//index.html"  // Replace with your real domain
-        }
-    });
-
-    if (error) {
-        alert("Google Login failed: " + error.message);
-    }
-});
-        // After a successful login, retrieve user info
-supabase.auth.onAuthStateChange(async (event, session) => {
-    if (session) {
-        const user = session.user;
-        const { data: userData, error } = await supabase
-            .from('users')  // 'users' is the table name where user details are stored
-            .select('name, profile_picture')
-            .eq('id', user.id)  // Match user ID
-            .single();
-
-        if (error) {
-            console.error('Error fetching user data:', error);
-        } else {
-            // Update the UI with user info (name and profile picture)
-            document.getElementById('user-name').innerText = userData.name;
-            document.getElementById('user-image').src = userData.profile_picture || 'https://i.postimg.cc/VvwnKx7X/profile-8861091.png'; 
-            // Show the profile image and hide the account name
-            document.getElementById('user-image').style.display = 'block';
-            document.getElementById('user-name').style.display = 'none';
- // Set a default if not available
-        }
-    }
-});
-
-
-
-    </script>
-
 </body>
 </html>
